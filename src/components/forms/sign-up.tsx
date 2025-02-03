@@ -29,9 +29,9 @@ export function SignUpForm({
   const form = useForm<SignUp>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -72,6 +72,19 @@ export function SignUpForm({
           <div className="grid gap-4">
             <FormField
               control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Max" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -96,20 +109,6 @@ export function SignUpForm({
                   <FormDescription>
                     Must be at least 8 characters long
                   </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="● ● ● ● ● ● ● ● ●" {...field} />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

@@ -3,7 +3,7 @@
 import { getPayload } from "@/lib/getPayload";
 import { headers as nextHeaders } from "next/headers";
 
-export const auth = async () => {
+export const getAuth = async () => {
   const { headers, payload } = await Promise.all([
     nextHeaders(),
     getPayload(),

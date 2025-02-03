@@ -13,7 +13,7 @@ export const Logo = (props: Props) => {
     loading: loadingFromProps,
     priority: priorityFromProps,
     className,
-    src = "/logo-light.svg",
+    src = "/logo-light.png",
   } = props;
 
   const loading = loadingFromProps || "lazy";

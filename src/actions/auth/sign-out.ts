@@ -4,9 +4,10 @@ import { siteConfig } from "@/config/site";
 import { cookies } from "next/headers";
 
 export const signOutAction = async () => {
-  const { name } = siteConfig.cookies.token;
+  const { name } = siteConfig.cookies;
 
-  (await cookies()).delete(name);
+  const cookie = await cookies();
+  cookie.delete(name);
 
   return { success: true };
 };

@@ -37,6 +37,23 @@ export const Users: CollectionConfig = {
     },
   },
   fields: [
+    {
+      name: "name",
+      type: "text",
+    },
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      options: [
+        { label: "Super Admin", value: "super-admin" },
+        { label: "Admin", value: "admin" },
+        { label: "User", value: "user" },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
     // Email added by default
     // Add more fields as needed
   ],

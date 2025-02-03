@@ -19,6 +19,7 @@ export const signupAction = async (args: SignUp) => {
     collection: "users",
     data: {
       ...args,
+      role: "user",
     },
   });
 
@@ -38,13 +39,10 @@ export const signupAction = async (args: SignUp) => {
     throw new Error("Failed to automatically sign in.");
   }
 
-  const { name, options } = siteConfig.cookies.token;
+  const { options, name } = siteConfig.cookies;
 
-  (await cookies()).set({
-    name,
-    value: login.token,
-    ...options,
-  });
+  const cookie = await cookies();
+  cookie.set(name, login.token, { ...options });
 
   return login;
 };

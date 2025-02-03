@@ -1,20 +1,16 @@
 export const siteConfig = {
-  name: "SaaS Starter",
+  name: "Aqarchain",
   cookies: {
-    token: {
-      name: "token",
-      options: {
-        maxAge: 60 * 60 * 24 * 7, // 1 week
-        path: "/",
-        domain: process.env.HOST ?? "localhost",
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        SameSite: true,
-      },
+    name: "aqarchain-token",
+    options: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 1 week
     },
   },
   supports: {
-    email: "support@gmail.com",
-    phone: "+1234567890",
+    email: "support@aqarchain.in",
+    phone: "+971 00 0000 0000",
   },
 };

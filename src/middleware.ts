@@ -4,7 +4,7 @@ import { siteConfig } from "./config/site";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get(siteConfig.cookies.token.name);
+  const token = request.cookies.get(siteConfig.cookies.name);
 
   if (pathname.startsWith("/dashboard") && !token) {
     const signInUrl = new URL("/sign-in", request.url);

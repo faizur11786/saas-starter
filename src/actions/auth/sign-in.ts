@@ -23,12 +23,10 @@ export const loginAction = async (args: SignIn) => {
   if (!doc || !doc?.token) {
     throw new Error("Login failed");
   }
-  const { name, options } = siteConfig.cookies.token;
+  const { options, name } = siteConfig.cookies;
 
-  (await cookies()).set({
-    name,
-    value: doc?.token,
-    ...options,
-  });
+  const cookie = await cookies();
+  cookie.set(name, doc.token, { ...options });
+
   return doc;
 };
