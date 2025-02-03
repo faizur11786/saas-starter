@@ -54,7 +54,9 @@ export const PropertyCard = ({
         <p className="text-lg line-clamp-1 mb-1">{title || "NA"}</p>
         <div className="grid grid-cols-2 gap-1">
           <div className="flex items-center gap-2">
-            <Combine className="text-primary" />
+            <div className="flex justify-center items-center w-10 h-10 bg-primary/15 rounded-md">
+              <Combine className="text-primary w-6 h-6" />
+            </div>
             <div>
               <p className="text-sm text-muted-foreground">Fraction</p>
               <p className="text-pretty text-primary font-semibold">
@@ -63,7 +65,9 @@ export const PropertyCard = ({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <CircleDollarSign className="text-primary" />
+            <div className="flex justify-center items-center w-10 h-10 bg-primary/15 rounded-md">
+              <CircleDollarSign className="text-primary w-6 h-6" />
+            </div>
             <div>
               <p className="text-sm text-muted-foreground">Per Token</p>
               <p className="text-pretty text-primary font-semibold">$1000</p>
