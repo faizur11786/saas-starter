@@ -1,45 +1,25 @@
 "use client";
 import { Media } from "@/components/media";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+
 import { Separator } from "@/components/ui/separator";
-import { formatNumber } from "@/lib/formatNumber";
-import { cn, currencyFormatter, formatCurrencySuffixes } from "@/lib/utils";
+import { formatCurrencySuffixes } from "@/lib/utils";
 import { Property } from "@/payload-types";
-import { BuyTokenSchema } from "@/schema/property";
 import {
   CircleDollarSign,
-  CirclePercent,
   Coins,
   Combine,
   MapPin,
-  Mountain,
   Percent,
 } from "lucide-react";
 import React, { Fragment, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import BuyForm from "./buy-form";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import Success from "./success";

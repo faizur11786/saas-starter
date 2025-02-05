@@ -6,15 +6,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import Link from "next/link";
 import { Fragment } from "react";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { getAuth } from "@/actions/auth/user";
 import { redirect } from "next/navigation";
-import PageClient from "./page.client";
 
 export default async function Page() {
   const auth = await getAuth();
@@ -69,19 +66,7 @@ export default async function Page() {
             height={200}
           />
         </div>
-        {!docs.length ? (
-          <div className="text-center space-y-4">
-            <h3>No investments found</h3>
-            <p className="text-muted-foreground">
-              Explore your first investment
-            </p>
-            <Button asChild>
-              <Link href="/discover">Explore</Link>
-            </Button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">"Hello"</div>
-        )}
+        <div className="flex-1 rounded-xl bg-muted/50 p-6 overflow-hidden relative"></div>
       </div>
     </Fragment>
   );

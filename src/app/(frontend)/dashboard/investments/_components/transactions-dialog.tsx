@@ -16,7 +16,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -24,8 +23,8 @@ import {
 
 import { stringify } from "qs-esm";
 import type { PaginatedDocs, Where } from "payload";
-import { Investment, Transaction } from "@/payload-types";
-import { formatDistance, formatRelative, subDays } from "date-fns";
+import { Transaction } from "@/payload-types";
+import { formatDistance } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrencySuffixes } from "@/lib/utils";
 
