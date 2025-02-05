@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPayload } from "@/lib/getPayload";
-import { Properties } from "./components/property-card";
+import { Properties } from "./_components/property-card";
 import { Blinds } from "lucide-react";
 
 export default async function Discover() {
@@ -9,7 +8,6 @@ export default async function Discover() {
     collection: "properties",
     depth: 1,
     limit: 12,
-    overrideAccess: false,
     select: {
       metadata: true,
       price: true,
@@ -20,6 +18,12 @@ export default async function Discover() {
       title: true,
       description: true,
       pricePerToken: true,
+      currency: true,
+      soldQuantity: true,
+      roi: true,
+    },
+    where: {
+      _status: { equals: "published" },
     },
   });
 
@@ -47,50 +51,7 @@ export default async function Discover() {
             Brief property description
           </p>
         </div>
-
         <div>{docs.length && <Properties docs={docs} />}</div>
-      </div>
-      <div>
-        <div className="mb-4">
-          <h3 className="text-xl">Upcoming Properties</h3>
-          <p className="text-sm text-muted-foreground"></p>
-        </div>
-
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Pro</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div>
-                <h4>Price</h4>
-                <p>$1000</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-      <div>
-        <div className="mb-4">
-          <h3 className="text-xl">Closed Properties</h3>
-          <p className="text-sm text-muted-foreground">
-            Brief property description
-          </p>
-        </div>
-
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Pro</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div>
-                <h4>Price</h4>
-                <p>$1000</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </section>
   );

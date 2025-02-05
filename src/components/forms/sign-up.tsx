@@ -38,11 +38,9 @@ export function SignUpForm({
   const { mutate, isPending } = useMutation({
     mutationFn: signupAction,
     onError: (error) => {
-      console.log({ error });
       toast.error(error.message || "An error occurred during signup", {
         id: "signup",
       });
-      console.log({ error });
     },
     onSuccess: (data) => {
       toast.success("Sign up successful", { id: "signup" });
@@ -55,7 +53,6 @@ export function SignUpForm({
   const onSubmit = useCallback(
     (data: SignUp) => {
       toast.loading("Signing up...", { id: "signup" });
-      console.log(data);
       mutate(data);
     },
     [mutate]

@@ -2,8 +2,9 @@
 
 import { getPayload } from "@/lib/getPayload";
 import { headers as nextHeaders } from "next/headers";
+import { cache } from "react";
 
-export const getAuth = async () => {
+export const getAuth = cache(async () => {
   const { headers, payload } = await Promise.all([
     nextHeaders(),
     getPayload(),
@@ -25,4 +26,4 @@ export const getAuth = async () => {
     payload.logger.error("Auth error", error);
     return null;
   }
-};
+});

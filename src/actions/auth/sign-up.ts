@@ -19,7 +19,7 @@ export const signupAction = async (args: SignUp) => {
     collection: "users",
     data: {
       ...args,
-      role: "user",
+      roles: ["user"],
     },
   });
 

@@ -8,9 +8,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { redirect } from "next/navigation";
 import { Fragment } from "react";
 
 export default function Page() {
+  redirect("/dashboard/investments");
   return (
     <Fragment>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">

@@ -36,7 +36,11 @@ export const Properties: CollectionConfig = {
     beforeChange: [
       populatePublishedAt,
       ({ data }) => {
-        data.pricePerToken = Math.floor(Number(data.price) / Number(data.area));
+        if (data.price && data.area) {
+          data.pricePerToken = Math.floor(
+            Number(data.price) / Number(data.area)
+          );
+        }
       },
     ],
     afterDelete: [revalidateDelete],
@@ -72,46 +76,60 @@ export const Properties: CollectionConfig = {
           label: "Attributes",
           fields: [
             {
-              type: "row",
-              fields: [
-                {
-                  name: "area",
-                  type: "text",
-                  required: true,
-                  admin: {
-                    description: "in square feet",
-                  },
-                },
-                {
-                  name: "location",
-                  type: "text",
-                  required: true,
-                },
+              name: "area",
+              type: "number",
+              required: true,
+              admin: {
+                description: "in square feet",
+              },
+            },
+            {
+              name: "location",
+              type: "text",
+              required: true,
+            },
+            {
+              name: "currency",
+              type: "select",
+              defaultValue: "AED",
+              options: [
+                { label: "USD", value: "USD" },
+                { label: "AED", value: "AED" },
               ],
             },
             {
-              type: "row",
-              fields: [
-                {
-                  name: "price",
-                  type: "text",
-                  required: true,
-                  validate: (data: any) =>
-                    /^\d+$/.test(data) || "Price must be an integer.",
-                  admin: {
-                    description: "Property value in dollars",
-                  },
-                },
-                {
-                  name: "pricePerToken",
-                  type: "text",
-                  admin: {
-                    readOnly: true,
-                    description:
-                      "Auto calculated based on price and area ( price / area)",
-                  },
-                },
-              ],
+              name: "price",
+              type: "number",
+              required: true,
+              admin: {
+                description: "Property value",
+              },
+            },
+            {
+              name: "pricePerToken",
+              type: "number",
+              admin: {
+                readOnly: true,
+                description:
+                  "Auto calculated based on price and area ( price / area)",
+              },
+            },
+            {
+              name: "soldQuantity",
+              type: "number",
+              defaultValue: 0,
+              admin: {
+                readOnly: true,
+                description: "Number of tokens sold (Auto-calculated)",
+              },
+            },
+            {
+              name: "roi",
+              label: "Return on investment",
+              type: "number",
+              admin: {
+                description: "ROI should multiply by 100",
+              },
             },
           ],
         },

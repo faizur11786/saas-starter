@@ -12,6 +12,8 @@ export interface Config {
   };
   collections: {
     properties: Property;
+    investments: Investment;
+    transactions: Transaction;
     users: User;
     media: Media;
     organizations: Organization;
@@ -25,6 +27,8 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     properties: PropertiesSelect<false> | PropertiesSelect<true>;
+    investments: InvestmentsSelect<false> | InvestmentsSelect<true>;
+    transactions: TransactionsSelect<false> | TransactionsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     organizations: OrganizationsSelect<false> | OrganizationsSelect<true>;
@@ -85,16 +89,25 @@ export interface Property {
   /**
    * in square feet
    */
-  area: string;
+  area: number;
   location: string;
+  currency?: ('USD' | 'AED') | null;
   /**
-   * Property value in dollars
+   * Property value
    */
-  price: string;
+  price: number;
   /**
    * Auto calculated based on price and area ( price / area)
    */
-  pricePerToken?: string | null;
+  pricePerToken?: number | null;
+  /**
+   * Number of tokens sold (Auto-calculated)
+   */
+  soldQuantity?: number | null;
+  /**
+   * ROI should multiply by 100
+   */
+  roi?: number | null;
   metadata?: {
     title?: string | null;
     /**
@@ -205,12 +218,29 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "investments".
+ */
+export interface Investment {
+  id: string;
+  status?: ('pending' | 'claimed' | 'refunded') | null;
+  /**
+   * Total amount paid for the transaction ( quantity * property.pricePerToken )
+   */
+  amount: number;
+  quantity: number;
+  property?: (string | null) | Property;
+  user?: (string | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: string;
   name?: string | null;
-  role: 'super-admin' | 'admin' | 'user';
+  roles: ('super-admin' | 'admin' | 'user')[];
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -221,6 +251,24 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "transactions".
+ */
+export interface Transaction {
+  id: string;
+  status?: ('pending' | 'completed' | 'failed') | null;
+  /**
+   * Total amount paid for the transaction ( quantity * property.pricePerToken )
+   */
+  amount: number;
+  quantity: number;
+  property?: (string | null) | Property;
+  investment?: (string | null) | Investment;
+  user?: (string | null) | User;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -385,6 +433,14 @@ export interface PayloadLockedDocument {
         value: string | Property;
       } | null)
     | ({
+        relationTo: 'investments';
+        value: string | Investment;
+      } | null)
+    | ({
+        relationTo: 'transactions';
+        value: string | Transaction;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null)
@@ -460,8 +516,11 @@ export interface PropertiesSelect<T extends boolean = true> {
   media?: T;
   area?: T;
   location?: T;
+  currency?: T;
   price?: T;
   pricePerToken?: T;
+  soldQuantity?: T;
+  roi?: T;
   metadata?:
     | T
     | {
@@ -479,11 +538,38 @@ export interface PropertiesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "investments_select".
+ */
+export interface InvestmentsSelect<T extends boolean = true> {
+  status?: T;
+  amount?: T;
+  quantity?: T;
+  property?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "transactions_select".
+ */
+export interface TransactionsSelect<T extends boolean = true> {
+  status?: T;
+  amount?: T;
+  quantity?: T;
+  property?: T;
+  investment?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
-  role?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

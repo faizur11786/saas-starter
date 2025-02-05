@@ -24,11 +24,11 @@ export const Logo = (props: Props) => {
     <img
       alt="Logo"
       width={193}
-      height={34}
+      height={44}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={cn("max-w-[9.375rem] w-full h-[34px]", className)}
+      className={cn("max-w-[9.375rem] w-full h-[44px]", className)}
       src={src}
     />
   );

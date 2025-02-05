@@ -14,6 +14,8 @@ import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import { NODEMAILER_ADAPTER_CONFIG } from "./emails/nodemailer";
 import { Properties } from "./collections/Properties";
 import { plugins } from "./plugins";
+import { Investments } from "./collections/Investments";
+import { Transactions } from "./collections/transactions";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,7 +28,16 @@ export default buildConfig({
     },
   },
   cookiePrefix: "aqarchain",
-  collections: [Properties, Users, Media, Organizations, Plans, Subscriptions],
+  collections: [
+    Properties,
+    Investments,
+    Transactions,
+    Users,
+    Media,
+    Organizations,
+    Plans,
+    Subscriptions,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

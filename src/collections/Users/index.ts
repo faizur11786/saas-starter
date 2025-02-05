@@ -4,6 +4,9 @@ import { User } from "@/payload-types";
 import ResetPasswordEmail from "@/emails/reset-password";
 import { getServerSideURL } from "@/lib/getURL";
 import { siteConfig } from "@/config/site";
+import { isSuperAdmin, superAdmin } from "@/access/authenticated";
+import { checkUserRoles } from "@/lib/checkUserRoles";
+import { adminsAndSelf } from "./access/adminsAndSelf";
 
 export const Users: CollectionConfig = {
   slug: "users",
@@ -11,6 +14,7 @@ export const Users: CollectionConfig = {
     useAsTitle: "email",
   },
   auth: {
+    tokenExpiration: siteConfig.cookies.options.maxAge,
     forgotPassword: {
       expiration: 15 * 60, // 15 minutes,
       // @ts-ignore
@@ -36,15 +40,29 @@ export const Users: CollectionConfig = {
       },
     },
   },
+  access: {
+    read: adminsAndSelf,
+    update: adminsAndSelf,
+    delete: superAdmin,
+    unlock: superAdmin,
+    admin: ({ req: { user } }) => {
+      if (user && isSuperAdmin(user)) {
+        return true;
+      }
+      return false;
+    },
+  },
   fields: [
     {
       name: "name",
       type: "text",
     },
     {
-      name: "role",
+      name: "roles",
       type: "select",
       required: true,
+      hasMany: true,
+      defaultValue: "user",
       options: [
         { label: "Super Admin", value: "super-admin" },
         { label: "Admin", value: "admin" },
@@ -53,6 +71,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: "sidebar",
       },
+      access: {},
     },
     // Email added by default
     // Add more fields as needed

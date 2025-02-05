@@ -1,6 +1,5 @@
 import { getAuth } from "@/actions/auth/user";
 import { Header } from "@/components/header";
-import "./../globals.scss";
 
 export default async function PublicLayout({
   children,
