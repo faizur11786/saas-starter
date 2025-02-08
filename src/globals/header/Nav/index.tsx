@@ -13,6 +13,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { CMSLink } from "@/components/custom/cms-link";
+import { cn } from "@/lib/utils";
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   return (
