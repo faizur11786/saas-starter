@@ -1,7 +1,7 @@
 "use server";
 
 import { siteConfig } from "@/config/site";
-import { getPayload } from "@/lib/getPayload";
+import { getPayload } from "@/lib/payload";
 import { SignUp, signUpSchema } from "@/schema/auth";
 import { cookies } from "next/headers";
 

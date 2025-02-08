@@ -1,5 +1,5 @@
 import { getAuth } from "@/actions/auth/user";
-import { Logo } from "@/components/custom/logo";
+import { Logo } from "@/components/logo";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 

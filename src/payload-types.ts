@@ -11,14 +11,10 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
-    properties: Property;
-    investments: Investment;
-    transactions: Transaction;
+    services: Service;
     users: User;
     media: Media;
-    organizations: Organization;
-    plans: Plan;
-    subscriptions: Subscription;
+    pages: Page;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -26,14 +22,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    properties: PropertiesSelect<false> | PropertiesSelect<true>;
-    investments: InvestmentsSelect<false> | InvestmentsSelect<true>;
-    transactions: TransactionsSelect<false> | TransactionsSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    organizations: OrganizationsSelect<false> | OrganizationsSelect<true>;
-    plans: PlansSelect<false> | PlansSelect<true>;
-    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -42,8 +34,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    header: Header;
+    footer: Footer;
+  };
+  globalsSelect: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -79,45 +77,41 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "properties".
+ * via the `definition` "services".
  */
-export interface Property {
+export interface Service {
   id: string;
   title: string;
   description: string;
-  media: (string | Media)[];
-  /**
-   * in square feet
-   */
-  area: number;
-  location: string;
-  currency?: ('USD' | 'AED') | null;
-  /**
-   * Property value
-   */
-  price: number;
-  /**
-   * Auto calculated based on price and area ( price / area)
-   */
-  pricePerToken?: number | null;
-  /**
-   * Number of tokens sold (Auto-calculated)
-   */
-  soldQuantity?: number | null;
-  /**
-   * ROI should multiply by 100
-   */
-  roi?: number | null;
-  metadata?: {
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | Media)[] | null;
+    image?: (string | null) | Media;
     description?: string | null;
   };
-  status?: ('active' | 'upcoming' | 'closed') | null;
-  publishedAt?: string | null;
+  status?: ('active' | 'inactive') | null;
+  /**
+   * Price in INR
+   */
+  price: number;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -218,23 +212,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "investments".
- */
-export interface Investment {
-  id: string;
-  status?: ('pending' | 'claimed' | 'refunded') | null;
-  /**
-   * Total amount paid for the transaction ( quantity * property.pricePerToken )
-   */
-  amount: number;
-  quantity: number;
-  property?: (string | null) | Property;
-  user?: (string | null) | User;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -254,80 +231,156 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transactions".
+ * via the `definition` "pages".
  */
-export interface Transaction {
+export interface Page {
   id: string;
-  status?: ('pending' | 'completed' | 'failed') | null;
-  /**
-   * Total amount paid for the transaction ( quantity * property.pricePerToken )
-   */
-  amount: number;
-  quantity: number;
-  property?: (string | null) | Property;
-  investment?: (string | null) | Investment;
-  user?: (string | null) | User;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "organizations".
- */
-export interface Organization {
-  id: string;
-  name: string;
-  description?: string | null;
-  owner: string | User;
-  members?: (string | User)[] | null;
-  activePlan: string | Plan;
-  isActive?: boolean | null;
-  settings?: {
-    billingEmail?: string | null;
-    notificationPreferences?: ('billing' | 'team' | 'security')[] | null;
+  title: string;
+  hero: {
+    type: 'none' | 'animatedImpact' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    title?: string | null;
+    /**
+     * Comma separated list of words to rotate (e.g. "Hello, World")
+     */
+    rotateWords?: string | null;
+    subtitle?: string | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'services';
+                  value: string | Service;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'secondary') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
   };
+  layout: (ContentBlock | MediaBlock | FeatureBlock)[];
+  metadata?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plans".
+ * via the `definition` "ContentBlock".
  */
-export interface Plan {
-  id: string;
-  name: string;
-  description?: string | null;
-  price: number;
-  interval: 'month' | 'year';
-  features?:
+export interface ContentBlock {
+  columns?:
     | {
-        name: string;
-        included?: boolean | null;
+        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        position?: ('left' | 'center' | 'right') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'services';
+                value: string | Service;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'secondary') | null;
+        };
         id?: string | null;
       }[]
     | null;
-  isActive?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "subscriptions".
+ * via the `definition` "MediaBlock".
  */
-export interface Subscription {
-  id: string;
-  organization: string | Organization;
-  plan: string | Plan;
-  status: 'active' | 'canceled' | 'past_due';
-  startDate: string;
-  endDate?: string | null;
-  billingDetails: {
-    amount: number;
-    interval: 'month' | 'year';
-    currency?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
+export interface MediaBlock {
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureBlock".
+ */
+export interface FeatureBlock {
+  title: string;
+  description?: string | null;
+  media: string | Media;
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -429,16 +482,8 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'properties';
-        value: string | Property;
-      } | null)
-    | ({
-        relationTo: 'investments';
-        value: string | Investment;
-      } | null)
-    | ({
-        relationTo: 'transactions';
-        value: string | Transaction;
+        relationTo: 'services';
+        value: string | Service;
       } | null)
     | ({
         relationTo: 'users';
@@ -449,16 +494,8 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'organizations';
-        value: string | Organization;
-      } | null)
-    | ({
-        relationTo: 'plans';
-        value: string | Plan;
-      } | null)
-    | ({
-        relationTo: 'subscriptions';
-        value: string | Subscription;
+        relationTo: 'pages';
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'payload-jobs';
@@ -508,20 +545,14 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "properties_select".
+ * via the `definition` "services_select".
  */
-export interface PropertiesSelect<T extends boolean = true> {
+export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  media?: T;
-  area?: T;
-  location?: T;
-  currency?: T;
-  price?: T;
-  pricePerToken?: T;
-  soldQuantity?: T;
-  roi?: T;
-  metadata?:
+  heroImage?: T;
+  content?: T;
+  meta?:
     | T
     | {
         title?: T;
@@ -529,39 +560,12 @@ export interface PropertiesSelect<T extends boolean = true> {
         description?: T;
       };
   status?: T;
-  publishedAt?: T;
+  price?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "investments_select".
- */
-export interface InvestmentsSelect<T extends boolean = true> {
-  status?: T;
-  amount?: T;
-  quantity?: T;
-  property?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transactions_select".
- */
-export interface TransactionsSelect<T extends boolean = true> {
-  status?: T;
-  amount?: T;
-  quantity?: T;
-  property?: T;
-  investment?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -675,63 +679,110 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "organizations_select".
+ * via the `definition` "pages_select".
  */
-export interface OrganizationsSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  owner?: T;
-  members?: T;
-  activePlan?: T;
-  isActive?: T;
-  settings?:
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
     | T
     | {
-        billingEmail?: T;
-        notificationPreferences?: T;
+        type?: T;
+        richText?: T;
+        title?: T;
+        rotateWords?: T;
+        subtitle?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
       };
+  layout?:
+    | T
+    | {
+        contentBlock?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        featureBlock?: T | FeatureBlockSelect<T>;
+      };
+  metadata?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plans_select".
+ * via the `definition` "ContentBlock_select".
  */
-export interface PlansSelect<T extends boolean = true> {
-  name?: T;
+export interface ContentBlockSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        size?: T;
+        position?: T;
+        richText?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock_select".
+ */
+export interface MediaBlockSelect<T extends boolean = true> {
+  media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureBlock_select".
+ */
+export interface FeatureBlockSelect<T extends boolean = true> {
+  title?: T;
   description?: T;
-  price?: T;
-  interval?: T;
+  media?: T;
   features?:
     | T
     | {
-        name?: T;
-        included?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
         id?: T;
       };
-  isActive?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "subscriptions_select".
- */
-export interface SubscriptionsSelect<T extends boolean = true> {
-  organization?: T;
-  plan?: T;
-  status?: T;
-  startDate?: T;
-  endDate?: T;
-  billingDetails?:
-    | T
-    | {
-        amount?: T;
-        interval?: T;
-        currency?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -798,16 +849,335 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  tabs?:
+    | {
+        label: string;
+        enableDirectLink?: boolean | null;
+        enableDropdown?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'services';
+                value: string | Service;
+              } | null);
+          url?: string | null;
+        };
+        navItems?:
+          | {
+              style?: ('default' | 'featured' | 'list') | null;
+              defaultLink?: {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'services';
+                        value: string | Service;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                description?: string | null;
+              };
+              featuredLink?: {
+                tag?: string | null;
+                label?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                links?:
+                  | {
+                      link: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'services';
+                              value: string | Service;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              listLinks?: {
+                tag?: string | null;
+                links?:
+                  | {
+                      link: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'services';
+                              value: string | Service;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  legal?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  columns?:
+    | {
+        label: string;
+        navItems?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'services';
+                      value: string | Service;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  navItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'services';
+                value: string | Service;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  tabs?:
+    | T
+    | {
+        label?: T;
+        enableDirectLink?: T;
+        enableDropdown?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        navItems?:
+          | T
+          | {
+              style?: T;
+              defaultLink?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    description?: T;
+                  };
+              featuredLink?:
+                | T
+                | {
+                    tag?: T;
+                    label?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              listLinks?:
+                | T
+                | {
+                    tag?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  legal?: T;
+  columns?:
+    | T
+    | {
+        label?: T;
+        navItems?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  navItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'properties';
-      value: string | Property;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'services';
+          value: string | Service;
+        } | null)
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null);
     global?: string | null;
     user?: (string | null) | User;
   };

@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: "Aqarchain",
+  name: "Kanoon4All",
   cookies: {
-    name: "aqarchain-token",
+    name: "kanoon4all-token",
     options: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -10,7 +10,7 @@ export const siteConfig = {
     },
   },
   supports: {
-    email: "support@aqarchain.in",
-    phone: "+971 00 0000 0000",
+    email: "support@kanoon4all.com",
+    phone: "+91 81516 10901",
   },
 };

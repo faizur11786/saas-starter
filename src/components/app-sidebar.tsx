@@ -17,9 +17,9 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { Logo } from "./custom/logo";
 import { Nav } from "./nav";
 import { User } from "@/payload-types";
+import { Logo } from "./logo";
 
 // This is sample data.
 const data = {

@@ -1,5 +1,10 @@
 import { getAuth } from "@/actions/auth/user";
-import { Header } from "@/components/header";
+import { Footer } from "@/globals/footer";
+import { Header } from "@/globals/header";
+import { getServerSideURL } from "@/lib/getURL";
+import { mergeOpenGraph } from "@/lib/payload/mergeOpenGraph";
+import type { Metadata } from "next";
+import { Fragment } from "react";
 
 export default async function PublicLayout({
   children,
@@ -7,12 +12,22 @@ export default async function PublicLayout({
   children: React.ReactNode;
 }>) {
   const auth = await getAuth();
-
   return (
-    <main className="w-full relative">
-      <Header user={auth?.user ?? null} />
+    <Fragment>
+      <Header />
+      {/* <Header /> */}
       {children}
+      <Footer />
       {/* <Footer /> */}
-    </main>
+    </Fragment>
   );
 }
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getServerSideURL()),
+  openGraph: mergeOpenGraph(),
+  twitter: {
+    card: "summary_large_image",
+    creator: "@payloadcms",
+  },
+};

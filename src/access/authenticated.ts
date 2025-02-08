@@ -30,3 +30,15 @@ export const superAdminAndSelf: Access = async ({ req: { user } }) => {
 
   return false;
 };
+
+export const authenticatedOrPublished: Access = ({ req: { user } }) => {
+  if (user) {
+    return true;
+  }
+
+  return {
+    _status: {
+      equals: "published",
+    },
+  };
+};

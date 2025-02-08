@@ -4,6 +4,13 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+/**
+ * Formats a given number or bigint as a currency in USD.
+ *
+ * @param value The number or bigint to format.
+ * @param options Optional Intl.NumberFormat options.
+ * @returns The formatted string.
+ */
 export const currencyFormatter = (
   value: number | bigint,
   options?: Intl.NumberFormatOptions
@@ -15,6 +22,12 @@ export const currencyFormatter = (
   }).format(value);
 };
 
+/**
+ * Formats a number with currency suffixes, such as "T" for trillion, "B" for billion, "M" for million, and "K" for thousand.
+ * @param value The number to format.
+ * @param options Options to pass to the Intl.NumberFormat constructor.
+ * @returns The formatted string.
+ */
 export const formatCurrencySuffixes = (
   value: number | bigint,
   options?: Intl.NumberFormatOptions
@@ -33,9 +46,34 @@ export const formatCurrencySuffixes = (
   return formatter.format(value);
 };
 
+/**
+ * Extracts the initials from a given string of words.
+ *
+ * @param title - The string containing words from which initials will be extracted.
+ * @returns A string of uppercase initials formed by taking the first letter of each word.
+ *
+ * @example
+ * getInitials("John Doe") // "JD"
+ * getInitials("Jane Smith Doe") // "JSD"
+ */
+
 export const getInitials = (title: string): string => {
   return title
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
 };
+
+/**
+ * Converts a camelCase string to kebab-case.
+ *
+ * @example
+ * toKebabCase("helloWorld") // "hello-world"
+ * toKebabCase("Multiple Words") // "multiple-words"
+ * toKebabCase("PascalCaseString") // "pascal-case-string"
+ */
+export const toKebabCase = (string: string): string =>
+  string
+    ?.replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/\s+/g, "-")
+    .toLowerCase();

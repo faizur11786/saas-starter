@@ -1,21 +1,22 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import {
+  FixedToolbarFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
-import { Organizations } from "./collections/Organizations";
-import { Plans } from "./collections/Plans";
-import { Subscriptions } from "./collections/Subscriptions";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import { NODEMAILER_ADAPTER_CONFIG } from "./emails/nodemailer";
-import { Properties } from "./collections/Properties";
 import { plugins } from "./plugins";
-import { Investments } from "./collections/Investments";
-import { Transactions } from "./collections/transactions";
+import { Header } from "./globals/header/config";
+import { Pages } from "./collections/Pages";
+import { Services } from "./collections/Services";
+import { Footer } from "./globals/footer/config";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -27,18 +28,15 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cookiePrefix: "aqarchain",
-  collections: [
-    Properties,
-    Investments,
-    Transactions,
-    Users,
-    Media,
-    Organizations,
-    Plans,
-    Subscriptions,
-  ],
-  editor: lexicalEditor(),
+  cookiePrefix: "kanoon4all",
+  collections: [Services, Users, Media, Pages],
+  globals: [Header, Footer],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),

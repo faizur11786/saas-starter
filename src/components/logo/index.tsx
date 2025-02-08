@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -13,7 +14,7 @@ export const Logo = (props: Props) => {
     loading: loadingFromProps,
     priority: priorityFromProps,
     className,
-    src = "/logo-light.png",
+    src = "/logo-dark.svg",
   } = props;
 
   const loading = loadingFromProps || "lazy";
@@ -22,13 +23,13 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Logo"
+      alt={`${siteConfig.name} Logo`}
       width={193}
-      height={44}
+      height={34}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={cn("max-w-[9.375rem] w-full h-[44px]", className)}
+      className={cn("max-w-[9.375rem] w-full h-[34px]", className)}
       src={src}
     />
   );

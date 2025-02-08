@@ -1,11 +1,10 @@
 import type { CollectionConfig } from "payload";
 import { render } from "@react-email/components";
-import { User } from "@/payload-types";
+import type { User } from "@/payload-types";
 import ResetPasswordEmail from "@/emails/reset-password";
 import { getServerSideURL } from "@/lib/getURL";
 import { siteConfig } from "@/config/site";
 import { isSuperAdmin, superAdmin } from "@/access/authenticated";
-import { checkUserRoles } from "@/lib/checkUserRoles";
 import { adminsAndSelf } from "./access/adminsAndSelf";
 
 export const Users: CollectionConfig = {

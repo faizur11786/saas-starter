@@ -1,6 +1,6 @@
 "use server";
 
-import { getPayload } from "@/lib/getPayload";
+import { getPayload } from "@/lib/payload";
 import { SignIn, signInSchema } from "@/schema/auth";
 import { cookies } from "next/headers";
 import { siteConfig } from "@/config/site";

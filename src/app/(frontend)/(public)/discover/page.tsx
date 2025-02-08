@@ -1,4 +1,4 @@
-import { getPayload } from "@/lib/getPayload";
+import { getPayload } from "@/lib/payload";
 import { Properties } from "./_components/property-card";
 import { Blinds } from "lucide-react";
 

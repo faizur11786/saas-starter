@@ -3,9 +3,9 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     container: {
@@ -108,7 +108,46 @@ export default {
       spacing: {
         "1/8": "12.5%",
       },
+      typography: ({}) => ({
+        DEFAULT: {
+          css: [
+            {
+              "--tw-prose-body": "var(--text)",
+              "--tw-prose-headings": "var(--text)",
+              h1: {
+                fontWeight: "normal",
+                marginBottom: "0.25em",
+              },
+            },
+          ],
+        },
+        base: {
+          css: [
+            {
+              h1: {
+                fontSize: "2.5rem",
+              },
+              h2: {
+                fontSize: "1.25rem",
+                fontWeight: 600,
+              },
+            },
+          ],
+        },
+        md: {
+          css: [
+            {
+              h1: {
+                fontSize: "3.5rem",
+              },
+              h2: {
+                fontSize: "1.5rem",
+              },
+            },
+          ],
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

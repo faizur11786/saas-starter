@@ -4,9 +4,9 @@ import type {
 } from "payload";
 
 import { revalidatePath, revalidateTag } from "next/cache";
-import { Property } from "@/payload-types";
+import { Page } from "@/payload-types";
 
-export const revalidateProperty: CollectionAfterChangeHook<Property> = ({
+export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
   previousDoc,
   req: { payload, context },
@@ -15,7 +15,7 @@ export const revalidateProperty: CollectionAfterChangeHook<Property> = ({
     if (doc._status === "published") {
       const path = doc.slug === "home" ? "/" : `/${doc.slug}`;
 
-      payload.logger.info(`Revalidating property at path: ${path}`);
+      payload.logger.info(`Revalidating page at path: ${path}`);
 
       revalidatePath(path);
       revalidateTag("pages-sitemap");
@@ -35,7 +35,7 @@ export const revalidateProperty: CollectionAfterChangeHook<Property> = ({
   return doc;
 };
 
-export const revalidateDelete: CollectionAfterDeleteHook<Property> = ({
+export const revalidateDelete: CollectionAfterDeleteHook<Page> = ({
   doc,
   req: { context },
 }) => {
