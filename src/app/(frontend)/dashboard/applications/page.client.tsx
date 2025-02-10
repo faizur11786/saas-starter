@@ -2,7 +2,7 @@
 
 import { DataTable } from "@/components/data-table/data-table";
 import { useDataTable } from "@/hooks/use-data-table";
-import { Application, Payment } from "@/payload-types";
+import { Application } from "@/payload-types";
 import React, { Fragment } from "react";
 import { getColumns } from "./_lib/columns";
 import { DataTableFilterField, DataTableRowAction } from "@/types";

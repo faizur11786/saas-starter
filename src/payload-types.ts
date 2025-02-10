@@ -41,10 +41,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    availability: Availability;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    availability: AvailabilitySelect<false> | AvailabilitySelect<true>;
   };
   locale: null;
   user: User & {
@@ -1147,6 +1149,88 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "availability".
+ */
+export interface Availability {
+  id: string;
+  daysOfWeek?:
+    | {
+        /**
+         * The day of the week for the availability slot, e.g. "Monday", "Tuesday", etc.
+         */
+        day: string;
+        /**
+         * The start time of the availability slot
+         */
+        startTime:
+          | '09:00'
+          | '09:30'
+          | '10:00'
+          | '10:30'
+          | '11:00'
+          | '11:30'
+          | '12:00'
+          | '12:30'
+          | '13:00'
+          | '13:30'
+          | '14:00'
+          | '14:30'
+          | '15:00'
+          | '15:30'
+          | '16:00'
+          | '16:30'
+          | '17:00'
+          | '17:30'
+          | '18:00'
+          | '18:30'
+          | '19:00'
+          | '19:30'
+          | '20:00'
+          | '20:30'
+          | '21:00'
+          | '21:30'
+          | '22:00';
+        /**
+         * The end time of the availability slot
+         */
+        endTime:
+          | '09:00'
+          | '09:30'
+          | '10:00'
+          | '10:30'
+          | '11:00'
+          | '11:30'
+          | '12:00'
+          | '12:30'
+          | '13:00'
+          | '13:30'
+          | '14:00'
+          | '14:30'
+          | '15:00'
+          | '15:30'
+          | '16:00'
+          | '16:30'
+          | '17:00'
+          | '17:30'
+          | '18:00'
+          | '18:30'
+          | '19:00'
+          | '19:30'
+          | '20:00'
+          | '20:30'
+          | '21:00'
+          | '21:30'
+          | '22:00';
+        isActive?: boolean | null;
+        slots?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1267,6 +1351,25 @@ export interface FooterSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "availability_select".
+ */
+export interface AvailabilitySelect<T extends boolean = true> {
+  daysOfWeek?:
+    | T
+    | {
+        day?: T;
+        startTime?: T;
+        endTime?: T;
+        isActive?: T;
+        slots?: T;
         id?: T;
       };
   updatedAt?: T;

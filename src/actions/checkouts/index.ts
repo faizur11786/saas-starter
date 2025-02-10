@@ -102,7 +102,7 @@ export const bookerCheckoutAction = async (args: BookerCheckout) => {
   const payment = await payload.create({
     collection: "payments",
     data: {
-      amount: Number(Number(data.duration) * 19.966),
+      amount: Number("599"),
       application: applicationDoc.id,
       email: data.email,
       mobile: data.mobile,
