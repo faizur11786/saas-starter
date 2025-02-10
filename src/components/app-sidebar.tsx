@@ -118,13 +118,13 @@ const data = {
   ],
   dashboard: [
     {
-      name: "Investments",
-      url: "/dashboard/investments",
+      name: "Applications",
+      url: "/dashboard/applications",
       icon: PieChart,
     },
     {
-      name: "Transactions",
-      url: "/dashboard/transactions",
+      name: "Payments",
+      url: "/dashboard/payments",
       icon: ArrowRightLeft,
     },
   ],

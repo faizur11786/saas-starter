@@ -2,13 +2,6 @@ import { CollectionConfig } from "payload";
 import { authenticated } from "@/access/authenticated";
 import { slugField } from "@/fields/slug";
 import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from "@payloadcms/plugin-seo/fields";
-import {
   BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
@@ -19,9 +12,7 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { generatePreviewPath } from "@/lib/payload/generatePreviewPath";
 import { MediaBlock } from "@/blocks/media/config";
-// import { Banner } from "@/blocks/Banner/config";
-// import { MediaBlock } from "@/blocks/MediaBlock/config";
-// import { generatePreviewPath } from "@/utilities/generatePreviewPath";
+import { metadataTab } from "@/fields/metadata";
 
 export const Services: CollectionConfig = {
   slug: "services",
@@ -95,33 +86,7 @@ export const Services: CollectionConfig = {
             },
           ],
         },
-        {
-          name: "meta",
-          label: "Meta",
-          fields: [
-            OverviewField({
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-              imagePath: "meta.image",
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: "media",
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-            }),
-          ],
-        },
+        metadataTab(),
       ],
     },
     {

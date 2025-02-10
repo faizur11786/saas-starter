@@ -12,7 +12,6 @@ import { redirect } from "next/navigation";
 import { Fragment } from "react";
 
 export default function Page() {
-  redirect("/dashboard/investments");
   return (
     <Fragment>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -21,12 +20,12 @@ export default function Page() {
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
+              {/* <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="#">
                   Building Your Application
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbSeparator className="hidden md:block" /> */}
               <BreadcrumbItem>
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
               </BreadcrumbItem>

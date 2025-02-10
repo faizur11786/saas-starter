@@ -13,13 +13,6 @@ import {
 // import { populatePublishedAt } from "../../hooks/populatePublishedAt";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from "@payloadcms/plugin-seo/fields";
 import { generatePreviewPath } from "@/lib/payload/generatePreviewPath";
 import { slugField } from "@/fields/slug";
 import { MediaBlock } from "@/blocks/media/config";
@@ -27,6 +20,7 @@ import { populatePublishedAt } from "./hooks/populatePublishedAt";
 import { ContentBlock } from "@/blocks/content/config";
 import { hero } from "@/heros/config";
 import { FeatureBlock } from "@/blocks/feature/config";
+import { metadataTab } from "@/fields/metadata";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -103,33 +97,7 @@ export const Pages: CollectionConfig = {
           ],
           label: "Content",
         },
-        {
-          name: "metadata",
-          label: "Metadata",
-          fields: [
-            OverviewField({
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-              imagePath: "meta.image",
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: "media",
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-            }),
-          ],
-        },
+        metadataTab(),
       ],
     },
     {

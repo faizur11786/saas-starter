@@ -17,6 +17,8 @@ import { Header } from "./globals/header/config";
 import { Pages } from "./collections/Pages";
 import { Services } from "./collections/Services";
 import { Footer } from "./globals/footer/config";
+import { Applications } from "./collections/Applications";
+import { Payments } from "./collections/Payments";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -29,7 +31,7 @@ export default buildConfig({
     },
   },
   cookiePrefix: "kanoon4all",
-  collections: [Services, Users, Media, Pages],
+  collections: [Applications, Payments, Services, Users, Media, Pages],
   globals: [Header, Footer],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

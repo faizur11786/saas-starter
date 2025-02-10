@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 /**
- * Formats a given number or bigint as a currency in USD.
+ * Formats a given number or bigint as a currency in INR.
  *
  * @param value The number or bigint to format.
  * @param options Optional Intl.NumberFormat options.
@@ -17,7 +17,7 @@ export const currencyFormatter = (
 ) => {
   return Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     ...options,
   }).format(value);
 };
@@ -77,3 +77,24 @@ export const toKebabCase = (string: string): string =>
     ?.replace(/([a-z])([A-Z])/g, "$1-$2")
     .replace(/\s+/g, "-")
     .toLowerCase();
+
+export const generateRandomString = (
+  length: number,
+  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+) => {
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+};
+
+export function toSentenceCase(str: string) {
+  return str
+    .replace(/_/g, " ")
+    .replace(/([A-Z])/g, " $1")
+    .toLowerCase()
+    .replace(/^\w/, (c) => c.toUpperCase())
+    .replace(/\s+/g, " ")
+    .trim();
+}

@@ -28,18 +28,18 @@ export const hero: Field = {
           label: "Animated Impact",
           value: "animatedImpact",
         },
-        {
-          label: "High Impact",
-          value: "highImpact",
-        },
-        {
-          label: "Medium Impact",
-          value: "mediumImpact",
-        },
-        {
-          label: "Low Impact",
-          value: "lowImpact",
-        },
+        // {
+        //   label: "High Impact",
+        //   value: "highImpact",
+        // },
+        // {
+        //   label: "Medium Impact",
+        //   value: "mediumImpact",
+        // },
+        // {
+        //   label: "Low Impact",
+        //   value: "lowImpact",
+        // },
       ],
       required: true,
     },

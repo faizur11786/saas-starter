@@ -11,6 +11,6 @@ export const siteConfig = {
   },
   supports: {
     email: "support@kanoon4all.com",
-    phone: "+91 81516 10901",
+    mobile: "+91 81516 10901",
   },
 };

@@ -31,7 +31,7 @@ export const Users: CollectionConfig = {
             userFirstName: user.email,
             companyName: siteConfig.name,
             supportEmail: siteConfig.supports.email,
-            supportPhone: siteConfig.supports.phone,
+            supportmobile: siteConfig.supports.mobile,
           }),
           { pretty: true }
         );
@@ -53,6 +53,16 @@ export const Users: CollectionConfig = {
   },
   fields: [
     {
+      name: "mobile",
+      type: "text",
+      unique: true,
+    },
+    {
+      name: "isMobileVerified",
+      type: "checkbox",
+      defaultValue: false,
+    },
+    {
       name: "name",
       type: "text",
     },
@@ -72,7 +82,5 @@ export const Users: CollectionConfig = {
       },
       access: {},
     },
-    // Email added by default
-    // Add more fields as needed
   ],
 };

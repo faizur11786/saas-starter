@@ -20,6 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signupAction } from "@/actions/auth/sign-up";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function SignUpForm({
   className,
@@ -117,9 +118,9 @@ export function SignUpForm({
           </div>
           <div className="text-center text-sm">
             Have an account?{" "}
-            <a href="/sign-in" className="underline underline-offset-4">
+            <Link href="/sign-in" className="underline underline-offset-4">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       </form>
