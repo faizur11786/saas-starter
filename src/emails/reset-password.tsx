@@ -15,7 +15,7 @@ interface ResetPasswordEmailProps {
   resetPasswordLink: string;
   companyName: string;
   supportEmail: string;
-  supportPhone?: string;
+  supportmobile?: string;
 }
 
 export default function ResetPasswordEmail({
@@ -23,7 +23,7 @@ export default function ResetPasswordEmail({
   resetPasswordLink,
   companyName,
   supportEmail,
-  supportPhone,
+  supportmobile,
 }: ResetPasswordEmailProps) {
   return (
     <Html>
@@ -61,7 +61,7 @@ export default function ResetPasswordEmail({
                 <Link href={`mailto:${supportEmail}`} className="text-blue-600">
                   {supportEmail}
                 </Link>
-                {supportPhone && ` or ${supportPhone}.`}
+                {supportmobile && ` or ${supportmobile}.`}
               </Text>
             </Section>
             <Section className="mt-8 text-center text-gray-500 text-sm">

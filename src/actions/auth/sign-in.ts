@@ -1,6 +1,6 @@
 "use server";
 
-import { getPayload } from "@/lib/getPayload";
+import { getPayload } from "@/lib/payload";
 import { SignIn, signInSchema } from "@/schema/auth";
 import { cookies } from "next/headers";
 import { siteConfig } from "@/config/site";
@@ -23,12 +23,10 @@ export const loginAction = async (args: SignIn) => {
   if (!doc || !doc?.token) {
     throw new Error("Login failed");
   }
-  const { name, options } = siteConfig.cookies.token;
+  const { options, name } = siteConfig.cookies;
 
-  (await cookies()).set({
-    name,
-    value: doc?.token,
-    ...options,
-  });
+  const cookie = await cookies();
+  cookie.set(name, doc.token, { ...options });
+
   return doc;
 };

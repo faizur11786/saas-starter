@@ -20,6 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signupAction } from "@/actions/auth/sign-up";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function SignUpForm({
   className,
@@ -29,20 +30,18 @@ export function SignUpForm({
   const form = useForm<SignUp>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
   const { mutate, isPending } = useMutation({
     mutationFn: signupAction,
     onError: (error) => {
-      console.log({ error });
       toast.error(error.message || "An error occurred during signup", {
         id: "signup",
       });
-      console.log({ error });
     },
     onSuccess: (data) => {
       toast.success("Sign up successful", { id: "signup" });
@@ -55,7 +54,6 @@ export function SignUpForm({
   const onSubmit = useCallback(
     (data: SignUp) => {
       toast.loading("Signing up...", { id: "signup" });
-      console.log(data);
       mutate(data);
     },
     [mutate]
@@ -70,6 +68,19 @@ export function SignUpForm({
       >
         <div className="grid gap-6">
           <div className="grid gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Max" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
@@ -101,29 +112,15 @@ export function SignUpForm({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="● ● ● ● ● ● ● ● ●" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <Button type="submit" className="w-full" disabled={isPending}>
               {isPending ? "Signing up..." : "Sign up"}
             </Button>
           </div>
           <div className="text-center text-sm">
             Have an account?{" "}
-            <a href="/sign-in" className="underline underline-offset-4">
+            <Link href="/sign-in" className="underline underline-offset-4">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       </form>

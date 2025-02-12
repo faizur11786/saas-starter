@@ -62,7 +62,6 @@ export function ResetPasswordForm({
   const onSubmit = useCallback(
     (data: ResetPassword) => {
       toast.loading("Resetting password...", { id: "reset-password" });
-      console.log(data);
       mutate(data);
     },
     [mutate]
