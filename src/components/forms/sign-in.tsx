@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Form,
   FormControl,
@@ -10,51 +10,48 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { SignIn, signInSchema } from "@/schema/auth";
+} from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { SignIn, signInSchema } from '@/schema/auth'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { loginAction } from "@/actions/auth/sign-in";
-import { toast } from "sonner";
-import { useCallback } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { loginAction } from '@/actions/auth/sign-in'
+import { toast } from 'sonner'
+import { useCallback } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
-export function SignInForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"form">) {
-  const router = useRouter();
+export function SignInForm({ className, ...props }: React.ComponentPropsWithoutRef<'form'>) {
+  const router = useRouter()
   const form = useForm<SignIn>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   const { mutate, isPending } = useMutation({
     mutationFn: loginAction,
     onError: (error) => {
-      toast.error(error.message ?? "Something went wrong", { id: "login" });
+      toast.error(error.message ?? 'Something went wrong', { id: 'login' })
     },
     onSuccess: (data) => {
-      toast.success("Login successful", { id: "login" });
+      toast.success('Login successful', { id: 'login' })
       if (data.token) {
-        router.push("/dashboard");
+        router.push('/dashboard')
       }
     },
-  });
+  })
 
   const onSubmit = useCallback(
     (data: SignIn) => {
-      toast.loading("Logging in...", { id: "login" });
-      mutate(data);
+      toast.loading('Logging in...', { id: 'login' })
+      mutate(data)
     },
-    [mutate]
-  );
+    [mutate],
+  )
 
   return (
     <Form {...form}>
@@ -70,9 +67,7 @@ export function SignInForm({
                   <FormControl>
                     <Input placeholder="m@example.com" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your email address used for signing in
-                  </FormDescription>
+                  <FormDescription>This is your email address used for signing in</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -100,11 +95,11 @@ export function SignInForm({
             />
 
             <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Login..." : "Login"}
+              {isPending ? 'Login...' : 'Login'}
             </Button>
           </div>
           <div className="text-center text-sm">
-            Don&apos;t have an account?{" "}
+            Don&apos;t have an account?{' '}
             <Link href="/sign-up" className="underline underline-offset-4">
               Sign up
             </Link>
@@ -112,5 +107,5 @@ export function SignInForm({
         </div>
       </form>
     </Form>
-  );
+  )
 }

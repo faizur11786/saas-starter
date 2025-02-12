@@ -1,6 +1,6 @@
-import { CollectionConfig } from "payload";
-import { authenticated } from "@/access/authenticated";
-import { slugField } from "@/fields/slug";
+import { CollectionConfig } from 'payload'
+import { authenticated } from '@/access/authenticated'
+import { slugField } from '@/fields/slug'
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -9,30 +9,30 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
   UnorderedListFeature,
-} from "@payloadcms/richtext-lexical";
-import { generatePreviewPath } from "@/lib/payload/generatePreviewPath";
-import { MediaBlock } from "@/blocks/media/config";
-import { metadataTab } from "@/fields/metadata";
+} from '@payloadcms/richtext-lexical'
+import { generatePreviewPath } from '@/lib/payload/generatePreviewPath'
+import { MediasBlock } from '@/blocks/media/config'
+import { metadataTab } from '@/fields/metadata'
 
 export const Services: CollectionConfig = {
-  slug: "services",
+  slug: 'services',
   admin: {
-    useAsTitle: "title",
+    useAsTitle: 'title',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
-          slug: typeof data?.slug === "string" ? data.slug : "",
-          collection: "services",
+          slug: typeof data?.slug === 'string' ? data.slug : '',
+          collection: 'services',
           req,
-        });
+        })
 
-        return path;
+        return path
       },
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        slug: typeof data?.slug === "string" ? data.slug : "",
-        collection: "services",
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        collection: 'services',
         req,
       }),
   },
@@ -44,42 +44,42 @@ export const Services: CollectionConfig = {
   },
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
     {
-      name: "description",
-      type: "textarea",
+      name: 'description',
+      type: 'textarea',
       required: true,
     },
     {
-      type: "tabs",
+      type: 'tabs',
       tabs: [
         {
-          label: "Content",
+          label: 'Content',
           fields: [
             {
-              name: "heroImage",
-              type: "upload",
-              relationTo: "media",
+              name: 'heroImage',
+              type: 'upload',
+              relationTo: 'medias',
             },
             {
-              name: "content",
-              type: "richText",
+              name: 'content',
+              type: 'richText',
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
                     HeadingFeature({
-                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
+                      enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'],
                     }),
-                    BlocksFeature({ blocks: [MediaBlock] }),
+                    BlocksFeature({ blocks: [MediasBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
                     UnorderedListFeature(),
-                  ];
+                  ]
                 },
               }),
               required: true,
@@ -90,31 +90,31 @@ export const Services: CollectionConfig = {
       ],
     },
     {
-      name: "status",
-      type: "select",
-      defaultValue: "active",
+      name: 'status',
+      type: 'select',
+      defaultValue: 'active',
       options: [
         {
-          label: "Active",
-          value: "active",
+          label: 'Active',
+          value: 'active',
         },
         {
-          label: "Inactive",
-          value: "inactive",
+          label: 'Inactive',
+          value: 'inactive',
         },
       ],
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
       },
     },
     {
-      name: "price",
-      type: "number",
+      name: 'price',
+      type: 'number',
       required: true,
       min: 0,
       admin: {
-        position: "sidebar",
-        description: "Price in INR",
+        position: 'sidebar',
+        description: 'Price in INR',
       },
     },
     ...slugField(),
@@ -128,4 +128,4 @@ export const Services: CollectionConfig = {
     },
     maxPerDoc: 50,
   },
-};
+}

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { FC, Fragment } from "react";
+import { Button } from '@/components/ui/button'
+import { FC, Fragment } from 'react'
 
 export const AuthButton: FC = () => {
   return (
@@ -30,5 +30,5 @@ export const AuthButton: FC = () => {
         </span>
       </div>
     </Fragment>
-  );
-};
+  )
+}

@@ -25,7 +25,7 @@ export const metadataTab: MetadataTab = (overrides: Partial<Tab> = {}) => {
           hasGenerateFn: true,
         }),
         MetaImageField({
-          relationTo: "media",
+          relationTo: "medias",
         }),
 
         MetaDescriptionField({}),

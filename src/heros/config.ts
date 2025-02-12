@@ -1,4 +1,4 @@
-import type { Field } from "payload";
+import type { Field } from 'payload'
 
 import {
   AlignFeature,
@@ -6,27 +6,27 @@ import {
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from "@payloadcms/richtext-lexical";
+} from '@payloadcms/richtext-lexical'
 
-import { linkGroup } from "@/fields/linkGroup";
+import { linkGroup } from '@/fields/linkGroup'
 
 export const hero: Field = {
-  name: "hero",
-  type: "group",
+  name: 'hero',
+  type: 'group',
   fields: [
     {
-      name: "type",
-      type: "select",
-      defaultValue: "lowImpact",
-      label: "Type",
+      name: 'type',
+      type: 'select',
+      defaultValue: 'lowImpact',
+      label: 'Type',
       options: [
         {
-          label: "None",
-          value: "none",
+          label: 'None',
+          value: 'none',
         },
         {
-          label: "Animated Impact",
-          value: "animatedImpact",
+          label: 'Animated Impact',
+          value: 'animatedImpact',
         },
         // {
         //   label: "High Impact",
@@ -44,46 +44,44 @@ export const hero: Field = {
       required: true,
     },
     {
-      name: "richText",
-      type: "richText",
+      name: 'richText',
+      type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
             AlignFeature(),
-          ];
+          ]
         },
       }),
       label: false,
       admin: {
-        condition: (_, { type } = {}) =>
-          ["highImpact", "mediumImpact", "lowImpact"].includes(type),
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'lowImpact'].includes(type),
       },
     },
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       admin: {
-        condition: (_, { type } = {}) => ["animatedImpact"].includes(type),
+        condition: (_, { type } = {}) => ['animatedImpact'].includes(type),
       },
     },
     {
-      name: "rotateWords",
-      type: "text",
+      name: 'rotateWords',
+      type: 'text',
       admin: {
-        description:
-          'Comma separated list of words to rotate (e.g. "Hello, World")',
-        condition: (_, { type } = {}) => ["animatedImpact"].includes(type),
+        description: 'Comma separated list of words to rotate (e.g. "Hello, World")',
+        condition: (_, { type } = {}) => ['animatedImpact'].includes(type),
       },
     },
     {
-      name: "subtitle",
-      type: "textarea",
+      name: 'subtitle',
+      type: 'textarea',
       admin: {
-        condition: (_, { type } = {}) => ["animatedImpact"].includes(type),
+        condition: (_, { type } = {}) => ['animatedImpact'].includes(type),
       },
     },
 
@@ -93,15 +91,15 @@ export const hero: Field = {
       },
     }),
     {
-      name: "media",
-      type: "upload",
+      name: 'medias',
+      type: 'upload',
       admin: {
         condition: (_, { type } = {}) =>
-          ["highImpact", "mediumImpact", "animatedImpact"].includes(type),
+          ['highImpact', 'mediumImpact', 'animatedImpact'].includes(type),
       },
-      relationTo: "media",
+      relationTo: 'medias',
       required: true,
     },
   ],
   label: false,
-};
+}

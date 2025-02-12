@@ -1,4 +1,3 @@
-import { OrderId as OrderId_b7b3a26a7fd483bc88df44402cc0a700 } from '@/collections/Payments/components/order-id'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
@@ -35,7 +34,6 @@ import { RowLabel as RowLabel_136e5b5eb095dc39b42ab4c2528bb385 } from '@/globals
 import { default as default_ba9b7f03f2de261d3e73df68fc7c8e9b } from '@/globals/footer/CustomRowLabel'
 
 export const importMap = {
-  "@/collections/Payments/components/order-id#OrderId": OrderId_b7b3a26a7fd483bc88df44402cc0a700,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,

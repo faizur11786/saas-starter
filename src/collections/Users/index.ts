@@ -1,41 +1,35 @@
-import type { CollectionConfig } from "payload";
-import { render } from "@react-email/components";
-import type { User } from "@/payload-types";
-import ResetPasswordEmail from "@/emails/reset-password";
-import { getServerSideURL } from "@/lib/getURL";
-import { siteConfig } from "@/config/site";
-import { isSuperAdmin, superAdmin } from "@/access/authenticated";
-import { adminsAndSelf } from "./access/adminsAndSelf";
+import type { CollectionConfig } from 'payload'
+import { render } from '@react-email/components'
+import type { User } from '@/payload-types'
+import ResetPasswordEmail from '@/emails/reset-password'
+import { getServerSideURL } from '@/lib/getURL'
+import { siteConfig } from '@/config/site'
+import { isSuperAdmin, superAdmin } from '@/access/authenticated'
+import { adminsAndSelf } from './access/adminsAndSelf'
 
 export const Users: CollectionConfig = {
-  slug: "users",
+  slug: 'users',
   admin: {
-    useAsTitle: "email",
+    useAsTitle: 'email',
   },
   auth: {
     tokenExpiration: siteConfig.cookies.options.maxAge,
     forgotPassword: {
       expiration: 15 * 60, // 15 minutes,
       // @ts-ignore
-      generateEmailHTML: async ({
-        token,
-        user,
-      }: {
-        token: string;
-        user: User;
-      }) => {
-        const link = `${getServerSideURL()}/reset-password?token=${token}`;
+      generateEmailHTML: async ({ token, user }: { token: string; user: User }) => {
+        const link = `${getServerSideURL()}/reset-password?token=${token}`
         const html = await render(
           ResetPasswordEmail({
             resetPasswordLink: link,
             userFirstName: user.email,
             companyName: siteConfig.name,
             supportEmail: siteConfig.supports.email,
-            supportmobile: siteConfig.supports.mobile,
+            supportMobile: siteConfig.supports.mobile,
           }),
-          { pretty: true }
-        );
-        return html;
+          { pretty: true },
+        )
+        return html
       },
     },
   },
@@ -46,41 +40,31 @@ export const Users: CollectionConfig = {
     unlock: superAdmin,
     admin: ({ req: { user } }) => {
       if (user && isSuperAdmin(user)) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
   },
   fields: [
     {
-      name: "mobile",
-      type: "text",
-      unique: true,
+      name: 'name',
+      type: 'text',
     },
     {
-      name: "isMobileVerified",
-      type: "checkbox",
-      defaultValue: false,
-    },
-    {
-      name: "name",
-      type: "text",
-    },
-    {
-      name: "roles",
-      type: "select",
+      name: 'roles',
+      type: 'select',
       required: true,
       hasMany: true,
-      defaultValue: "user",
+      defaultValue: 'user',
       options: [
-        { label: "Super Admin", value: "super-admin" },
-        { label: "Admin", value: "admin" },
-        { label: "User", value: "user" },
+        { label: 'Super Admin', value: 'super-admin' },
+        { label: 'Admin', value: 'admin' },
+        { label: 'User', value: 'user' },
       ],
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
       },
       access: {},
     },
   ],
-};
+}

@@ -1,14 +1,14 @@
-import type { Block } from "payload";
+import type { Block } from 'payload'
 
-export const MediaBlock: Block = {
-  slug: "mediaBlock",
-  interfaceName: "MediaBlock",
+export const MediasBlock: Block = {
+  slug: 'mediaBlock',
+  interfaceName: 'MediasBlock',
   fields: [
     {
-      name: "media",
-      type: "upload",
-      relationTo: "media",
+      name: 'medias',
+      type: 'upload',
+      relationTo: 'medias',
       required: true,
     },
   ],
-};
+}

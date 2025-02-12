@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react'
 
-import type { Service } from "@/payload-types";
+import type { Service } from '@/payload-types'
 
-import { Media } from "@/components/media";
-import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { getInitials } from "@/lib/utils";
+import { Medias } from '@/components/media'
+import { Star } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { getInitials } from '@/lib/utils'
 
 export const ServiceHero: React.FC<{
-  service: Service;
+  service: Service
 }> = ({ service }) => {
-  const { heroImage, title, metadata } = service;
-  const { image } = metadata || {};
+  const { heroImage, title, metadata } = service
+  const { image } = metadata || {}
 
-  const rating = Math.random() * 5;
+  const rating = Math.random() * 5
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end ">
@@ -25,35 +25,33 @@ export const ServiceHero: React.FC<{
                 {getInitials(title)}
               </div>
             )}
-            {image && typeof image !== "string" && <Media resource={image} />}
+            {image && typeof image !== 'string' && <Medias resource={image} />}
           </div>
           <div>
             <h1 className="mb-3 text-xl md:text-2xl">{title}</h1>
             <div className="flex gap-x-4 gap-y-2 items-center mb-3 flex-wrap">
               <div className="flex items-center">
                 {[1, 2, 3, 4, 5].map((value) => {
-                  const isHalf =
-                    rating % 1 !== 0 && value === Math.ceil(rating);
+                  const isHalf = rating % 1 !== 0 && value === Math.ceil(rating)
                   return (
                     <div key={value} className="relative inline-block">
                       <Star
-                        className={cn("w-4", {
-                          "fill-yellow-400 text-yellow-400":
-                            value <= Math.floor(rating),
-                          "fill-none text-muted-foreground": value > rating,
+                        className={cn('w-4', {
+                          'fill-yellow-400 text-yellow-400': value <= Math.floor(rating),
+                          'fill-none text-muted-foreground': value > rating,
                         })}
                       />
                       {isHalf && (
                         <Star
                           className="w-4 absolute top-0 left-0 text-yellow-400 fill-yellow-400"
-                          style={{ clipPath: "inset(0 50% 0 0)" }}
+                          style={{ clipPath: 'inset(0 50% 0 0)' }}
                         />
                       )}
                     </div>
-                  );
+                  )
                 })}
                 <span className="ml-2 text-xs text-muted-foreground">
-                  {rating > 0 ? `${rating.toFixed(1)} out of 5` : "No rating"}
+                  {rating > 0 ? `${rating.toFixed(1)} out of 5` : 'No rating'}
                 </span>
               </div>
             </div>
@@ -61,16 +59,11 @@ export const ServiceHero: React.FC<{
         </div>
       </div>
       <div className="min-h-[40vh] select-none">
-        {heroImage && typeof heroImage !== "string" && (
-          <Media
-            fill
-            priority
-            imgClassName="-z-10 object-cover"
-            resource={heroImage}
-          />
+        {heroImage && typeof heroImage !== 'string' && (
+          <Medias fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
         )}
         <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
       </div>
     </div>
-  );
-};
+  )
+}

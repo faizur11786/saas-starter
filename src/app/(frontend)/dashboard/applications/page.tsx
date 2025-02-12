@@ -5,45 +5,43 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import Link from "next/link";
-import { Fragment } from "react";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { getAuth } from "@/actions/auth/user";
-import { redirect } from "next/navigation";
-import PageClient from "./page.client";
-import { searchParamsCache } from "./_lib/validations";
-import { SearchParams } from "nuqs";
+} from '@/components/ui/breadcrumb'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import { Fragment } from 'react'
+import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import { getAuth } from '@/actions/auth/user'
+import { redirect } from 'next/navigation'
+import PageClient from './page.client'
+import { searchParamsCache } from './_lib/validations'
+import { SearchParams } from 'nuqs'
 
 interface PageProps {
-  searchParams: Promise<SearchParams>;
+  searchParams: Promise<SearchParams>
 }
 
 export default async function Page(props: PageProps) {
-  const auth = await getAuth();
+  const auth = await getAuth()
 
   if (!auth?.user) {
-    return redirect("/sign-in");
+    return redirect('/sign-in')
   }
 
-  const searchParams = await props.searchParams;
+  const searchParams = await props.searchParams
 
-  const { email, page, limit, status } = searchParamsCache.parse(searchParams);
+  const { email, page, limit, status } = searchParamsCache.parse(searchParams)
 
   const { docs, totalPages } = await auth.payload.find({
-    collection: "applications",
+    collection: 'applications',
     overrideAccess: false,
     user: auth.user,
     limit,
     page,
     where: {
       ...(email ? { email: { like: email } } : {}),
-      ...(status ? { status: { in: status.split(",") } } : {}),
+      ...(status ? { status: { in: status.split(',') } } : {}),
     },
-  });
+  })
 
   return (
     <Fragment>
@@ -67,12 +65,10 @@ export default async function Page(props: PageProps) {
       <div className="flex flex-col gap-4 p-4 pt-0">
         <div className="flex-1 rounded-xl bg-muted/50 p-6 overflow-hidden relative">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Your Investments
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight">Your Investments</h1>
             <p className="text-muted-foreground mt-2">
-              Track and manage your property token investments. View
-              performance, returns, and transaction history.
+              Track and manage your property token investments. View performance, returns, and
+              transaction history.
             </p>
           </div>
           <FlickeringGrid
@@ -90,5 +86,5 @@ export default async function Page(props: PageProps) {
         </div>
       </div>
     </Fragment>
-  );
+  )
 }

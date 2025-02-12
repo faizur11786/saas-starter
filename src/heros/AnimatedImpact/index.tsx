@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import type { Page } from "@/payload-types";
+import type { Page } from '@/payload-types'
 
-import { FC, useEffect } from "react";
+import { FC, useEffect } from 'react'
 // import { useHeaderTheme } from "@/providers/HeaderTheme";
 // import { WordRotate } from "@/components/ui/word-rotate";
-import { CMSLink } from "@/components/custom/cms-link";
-import { Media } from "@/components/media";
-import { WordRotate } from "@/components/ui/word-rotate";
-import { useHeaderTheme } from "@/providers/theme-provider";
+import { CMSLink } from '@/components/custom/cms-link'
+import { Medias } from '@/components/media'
+import { WordRotate } from '@/components/ui/word-rotate'
+import { useHeaderTheme } from '@/providers/theme-provider'
 
-export const AnimatedImpactHero: FC<Page["hero"]> = ({
+export const AnimatedImpactHero: FC<Page['hero']> = ({
   links,
-  media,
+  medias,
   rotateWords,
   title,
   subtitle,
 }) => {
-  const { setHeaderTheme } = useHeaderTheme();
+  const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
-    setHeaderTheme("dark");
-  });
+    setHeaderTheme('dark')
+  })
 
   return (
     <div
@@ -32,10 +32,7 @@ export const AnimatedImpactHero: FC<Page["hero"]> = ({
         <div className="max-w-[36.5rem] md:text-center">
           <h1 className="text-7xl mb-4">
             {title}
-            <WordRotate
-              className="text-6xl font-bold "
-              words={rotateWords?.split(",") ?? []}
-            />
+            <WordRotate className="text-6xl font-bold " words={rotateWords?.split(',') ?? []} />
           </h1>
           <p className="mb-4">{subtitle}</p>
           {Array.isArray(links) && links.length > 0 && (
@@ -45,22 +42,17 @@ export const AnimatedImpactHero: FC<Page["hero"]> = ({
                   <li key={i}>
                     <CMSLink {...link} />
                   </li>
-                );
+                )
               })}
             </ul>
           )}
         </div>
       </div>
       <div className="min-h-[80vh] select-none">
-        {media && typeof media === "object" && (
-          <Media
-            fill
-            imgClassName="-z-10 object-cover"
-            priority
-            resource={media}
-          />
+        {medias && typeof medias === 'object' && (
+          <Medias fill imgClassName="-z-10 object-cover" priority resource={medias} />
         )}
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react'
 
-import type { Page } from "@/payload-types";
+import type { Page } from '@/payload-types'
 
-import { AnimatedImpactHero } from "@/heros/AnimatedImpact";
+import { AnimatedImpactHero } from '@/heros/AnimatedImpact'
 
 const heroes = {
   animatedImpact: AnimatedImpactHero,
-};
+}
 
-export const RenderHero: React.FC<Page["hero"]> = (props) => {
-  const { type } = props || {};
+export const RenderHero: React.FC<Page['hero']> = (props) => {
+  const { type } = props || {}
 
-  if (!type || type === "none") return null;
+  if (!type || type === 'none') return null
 
-  const HeroToRender = heroes[type];
+  const HeroToRender = heroes[type]
 
-  if (!HeroToRender) return null;
+  if (!HeroToRender) return null
 
-  return <HeroToRender {...props} />;
-};
+  return <HeroToRender {...props} />
+}

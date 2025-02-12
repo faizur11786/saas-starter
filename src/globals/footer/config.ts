@@ -1,7 +1,7 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalConfig } from 'payload'
 
-import { link } from "@/fields/link";
-import { revalidateFooter } from "./hooks/revalidateFooter";
+import { link } from '@/fields/link'
+import { revalidateFooter } from './hooks/revalidateFooter'
 
 import {
   AlignFeature,
@@ -11,44 +11,44 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
   UnorderedListFeature,
-} from "@payloadcms/richtext-lexical";
+} from '@payloadcms/richtext-lexical'
 
 export const Footer: GlobalConfig = {
-  slug: "footer",
+  slug: 'footer',
   access: {
     read: () => true,
   },
   fields: [
     {
-      label: "Legal",
-      name: "legal",
-      type: "richText",
+      label: 'Legal',
+      name: 'legal',
+      type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
+            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
             HorizontalRuleFeature(),
             UnorderedListFeature(),
             AlignFeature(),
-          ];
+          ]
         },
       }),
     },
     {
-      name: "columns",
-      type: "array",
+      name: 'columns',
+      type: 'array',
       fields: [
         {
-          name: "label",
-          type: "text",
+          name: 'label',
+          type: 'text',
           required: true,
         },
         {
-          name: "navItems",
-          type: "array",
+          name: 'navItems',
+          type: 'array',
           fields: [
             link({
               appearances: false,
@@ -57,22 +57,22 @@ export const Footer: GlobalConfig = {
           admin: {
             initCollapsed: true,
             components: {
-              RowLabel: "@/globals/footer/RowLabel#RowLabel",
+              RowLabel: '@/globals/footer/RowLabel#RowLabel',
             },
           },
         },
       ],
       admin: {
         components: {
-          RowLabel: "@/globals/footer/CustomRowLabel",
+          RowLabel: '@/globals/footer/CustomRowLabel',
         },
       },
       maxRows: 8,
       minRows: 1,
     },
     {
-      name: "navItems",
-      type: "array",
+      name: 'navItems',
+      type: 'array',
       fields: [
         link({
           appearances: false,
@@ -82,7 +82,7 @@ export const Footer: GlobalConfig = {
       admin: {
         initCollapsed: true,
         components: {
-          RowLabel: "@/globals/footer/RowLabel#RowLabel",
+          RowLabel: '@/globals/footer/RowLabel#RowLabel',
         },
       },
     },
@@ -90,4 +90,4 @@ export const Footer: GlobalConfig = {
   hooks: {
     afterChange: [revalidateFooter],
   },
-};
+}

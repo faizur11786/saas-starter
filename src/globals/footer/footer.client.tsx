@@ -1,26 +1,24 @@
-import type { Footer } from "@/payload-types";
-import { FooterNav } from "./Nav";
-import Link from "next/link";
-import { Logo } from "@/components/logo";
-import { CMSLink } from "@/components/custom/cms-link";
-import RichText from "@/components/custom/rich-text";
-import { siteConfig } from "@/config/site";
+import type { Footer } from '@/payload-types'
+import { FooterNav } from './Nav'
+import Link from 'next/link'
+import { Logo } from '@/components/logo'
+import { CMSLink } from '@/components/custom/cms-link'
+import RichText from '@/components/custom/rich-text'
+import { siteConfig } from '@/config/site'
 interface FooterClientProps {
-  data: Footer;
+  data: Footer
 }
 
 export const FooterClient: React.FC<FooterClientProps> = ({ data }) => {
   return (
     <footer className="mt-auto border-t border-border py-12 space-y-12 bg-secondary">
       <div className="container px-4 flex justify-between">
-        <Link href={"/"}>
+        <Link href={'/'}>
           <Logo />
         </Link>
       </div>
       <div className="container px-4">
-        {data.legal && (
-          <RichText className="mb-6" data={data.legal} enableGutter={false} />
-        )}
+        {data.legal && <RichText className="mb-6" data={data.legal} enableGutter={false} />}
       </div>
 
       <FooterNav data={data} />
@@ -38,5 +36,5 @@ export const FooterClient: React.FC<FooterClientProps> = ({ data }) => {
         {`© 2025 ${siteConfig.name}. All rights reserved.`}
       </p>
     </footer>
-  );
-};
+  )
+}

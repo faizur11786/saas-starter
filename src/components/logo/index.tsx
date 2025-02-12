@@ -1,12 +1,12 @@
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import React from "react";
+import { siteConfig } from '@/config/site'
+import { cn } from '@/lib/utils'
+import React from 'react'
 
 interface Props {
-  className?: string;
-  loading?: "lazy" | "eager";
-  priority?: "auto" | "high" | "low";
-  src?: string;
+  className?: string
+  loading?: 'lazy' | 'eager'
+  priority?: 'auto' | 'high' | 'low'
+  src?: string
 }
 
 export const Logo = (props: Props) => {
@@ -14,11 +14,11 @@ export const Logo = (props: Props) => {
     loading: loadingFromProps,
     priority: priorityFromProps,
     className,
-    src = "/logo-dark.svg",
-  } = props;
+    src = '/logo-dark.svg',
+  } = props
 
-  const loading = loadingFromProps || "lazy";
-  const priority = priorityFromProps || "low";
+  const loading = loadingFromProps || 'lazy'
+  const priority = priorityFromProps || 'low'
 
   return (
     /* eslint-disable @next/next/no-img-element */
@@ -29,8 +29,8 @@ export const Logo = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={cn("max-w-[9.375rem] w-full h-[34px]", className)}
+      className={cn('max-w-[9.375rem] w-full h-[34px]', className)}
       src={src}
     />
-  );
-};
+  )
+}

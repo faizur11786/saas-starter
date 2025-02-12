@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react'
 
-import type { Props as MediaProps } from "../types";
+import type { Props as MediasProps } from '../types'
 
-import { cn } from "@/lib/utils";
-import { getClientSideURL } from "@/lib/getURL";
+import { cn } from '@/lib/utils'
+import { getClientSideURL } from '@/lib/getURL'
 
-export const VideoMedia: React.FC<MediaProps> = (props) => {
-  const { onClick, resource, videoClassName } = props;
+export const VideoMedias: React.FC<MediasProps> = (props) => {
+  const { onClick, resource, videoClassName } = props
 
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null)
   // const [showFallback] = useState<boolean>()
 
   useEffect(() => {
-    const { current: video } = videoRef;
+    const { current: video } = videoRef
     if (video) {
-      video.addEventListener("suspend", () => {
+      video.addEventListener('suspend', () => {
         // setShowFallback(true);
         // console.warn('Video was suspended, rendering fallback image.')
-      });
+      })
     }
-  }, []);
+  }, [])
 
-  if (resource && typeof resource === "object") {
-    const { filename } = resource;
+  if (resource && typeof resource === 'object') {
+    const { filename } = resource
 
     return (
       <video
@@ -37,10 +37,10 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
         playsInline
         ref={videoRef}
       >
-        <source src={`${getClientSideURL()}/media/${filename}`} />
+        <source src={`${getClientSideURL()}/medias/${filename}`} />
       </video>
-    );
+    )
   }
 
-  return null;
-};
+  return null
+}

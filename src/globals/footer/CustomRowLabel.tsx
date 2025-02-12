@@ -1,12 +1,12 @@
-"use client";
-import type { PayloadClientReactComponent, RowLabelComponent } from "payload";
+'use client'
+import type { PayloadClientReactComponent, RowLabelComponent } from 'payload'
 
-import { useRowLabel } from "@payloadcms/ui";
+import { useRowLabel } from '@payloadcms/ui'
 
 const CustomRowLabel: PayloadClientReactComponent<RowLabelComponent> = () => {
-  const { data } = useRowLabel<{ label: string }>();
+  const { data } = useRowLabel<{ label: string }>()
 
-  return data.label || "...";
-};
+  return data.label || '...'
+}
 
-export default CustomRowLabel;
+export default CustomRowLabel

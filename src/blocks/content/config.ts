@@ -1,4 +1,4 @@
-import type { Block, Field } from "payload";
+import type { Block, Field } from 'payload'
 
 import {
   AlignFeature,
@@ -8,105 +8,104 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
   UnorderedListFeature,
-} from "@payloadcms/richtext-lexical";
+} from '@payloadcms/richtext-lexical'
 
-import { link } from "@/fields/link";
+import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
   {
-    type: "row",
+    type: 'row',
     fields: [
       {
-        name: "size",
-        type: "select",
-        defaultValue: "oneThird",
+        name: 'size',
+        type: 'select',
+        defaultValue: 'oneThird',
         options: [
           {
-            label: "One Third",
-            value: "oneThird",
+            label: 'One Third',
+            value: 'oneThird',
           },
           {
-            label: "Half",
-            value: "half",
+            label: 'Half',
+            value: 'half',
           },
           {
-            label: "Two Thirds",
-            value: "twoThirds",
+            label: 'Two Thirds',
+            value: 'twoThirds',
           },
           {
-            label: "Full",
-            value: "full",
+            label: 'Full',
+            value: 'full',
           },
         ],
       },
       {
-        name: "position",
-        type: "select",
-        defaultValue: "left",
+        name: 'position',
+        type: 'select',
+        defaultValue: 'left',
         options: [
           {
-            label: "Left",
-            value: "left",
+            label: 'Left',
+            value: 'left',
           },
           {
-            label: "Center",
-            value: "center",
+            label: 'Center',
+            value: 'center',
           },
           {
-            label: "Right",
-            value: "right",
+            label: 'Right',
+            value: 'right',
           },
         ],
         admin: {
-          condition: (_, siblingData) => siblingData.size !== "full",
+          condition: (_, siblingData) => siblingData.size !== 'full',
         },
       },
     ],
   },
   {
-    name: "richText",
-    type: "richText",
+    name: 'richText',
+    type: 'richText',
     editor: lexicalEditor({
       features: ({ rootFeatures }) => {
         return [
           ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
+          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           HorizontalRuleFeature(),
           UnorderedListFeature(),
           AlignFeature(),
-        ];
+        ]
       },
     }),
     label: false,
   },
   {
-    name: "enableLink",
-    type: "checkbox",
+    name: 'enableLink',
+    type: 'checkbox',
   },
   link({
     overrides: {
       admin: {
         // @ts-ignore
-        condition: (_, { enableLink }: { enableLink: boolean }) =>
-          Boolean(enableLink),
+        condition: (_, { enableLink }: { enableLink: boolean }) => Boolean(enableLink),
       },
     },
   }),
-];
+]
 
 export const ContentBlock: Block = {
-  slug: "contentBlock",
-  interfaceName: "ContentBlock",
+  slug: 'contentBlock',
+  interfaceName: 'ContentBlock',
   fields: [
     {
-      name: "columns",
-      type: "array",
+      name: 'columns',
+      type: 'array',
       admin: {
         initCollapsed: true,
       },
       fields: columnFields,
     },
   ],
-};
+}

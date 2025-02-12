@@ -1,29 +1,19 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig } from 'payload'
 
-import {
-  authenticated,
-  authenticatedOrPublished,
-} from "@/access/authenticated";
-// import { Archive } from "../../blocks/ArchiveBlock/config";
-// import { CallToAction } from "../../blocks/CallToAction/config";
-// import { Content } from "../../blocks/Content/config";
-// import { FormBlock } from "../../blocks/Form/config";
-// import { MediaBlock } from "../../blocks/MediaBlock/config";
-// import { hero } from "@/heros/config";
-// import { populatePublishedAt } from "../../hooks/populatePublishedAt";
-import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
+import { authenticated, authenticatedOrPublished } from '@/access/authenticated'
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
-import { generatePreviewPath } from "@/lib/payload/generatePreviewPath";
-import { slugField } from "@/fields/slug";
-import { MediaBlock } from "@/blocks/media/config";
-import { populatePublishedAt } from "./hooks/populatePublishedAt";
-import { ContentBlock } from "@/blocks/content/config";
-import { hero } from "@/heros/config";
-import { FeatureBlock } from "@/blocks/feature/config";
-import { metadataTab } from "@/fields/metadata";
+import { generatePreviewPath } from '@/lib/payload/generatePreviewPath'
+import { slugField } from '@/fields/slug'
+import { MediasBlock } from '@/blocks/media/config'
+import { populatePublishedAt } from './hooks/populatePublishedAt'
+import { ContentBlock } from '@/blocks/content/config'
+import { hero } from '@/heros/config'
+import { FeatureBlock } from '@/blocks/feature/config'
+import { metadataTab } from '@/fields/metadata'
 
 export const Pages: CollectionConfig = {
-  slug: "pages",
+  slug: 'pages',
   access: {
     create: authenticated,
     delete: authenticated,
@@ -38,49 +28,49 @@ export const Pages: CollectionConfig = {
     slug: true,
   },
   admin: {
-    group: "Content Management System",
-    defaultColumns: ["title", "slug", "updatedAt"],
+    group: 'Content Management System',
+    defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
-          slug: typeof data?.slug === "string" ? data.slug : "",
-          collection: "pages",
+          slug: typeof data?.slug === 'string' ? data.slug : '',
+          collection: 'pages',
           req,
-        });
+        })
 
-        return path;
+        return path
       },
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        slug: typeof data?.slug === "string" ? data.slug : "",
-        collection: "pages",
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        collection: 'pages',
         req,
       }),
-    useAsTitle: "title",
+    useAsTitle: 'title',
   },
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
     {
-      type: "tabs",
+      type: 'tabs',
       tabs: [
         {
           fields: [hero],
-          label: "Hero",
+          label: 'Hero',
         },
         {
           fields: [
             {
-              name: "layout",
-              type: "blocks",
+              name: 'layout',
+              type: 'blocks',
               blocks: [
                 // CallToAction,
                 ContentBlock,
-                MediaBlock,
+                MediasBlock,
                 FeatureBlock,
                 // Archive,
                 // FormBlock,
@@ -95,16 +85,16 @@ export const Pages: CollectionConfig = {
               },
             },
           ],
-          label: "Content",
+          label: 'Content',
         },
         metadataTab(),
       ],
     },
     {
-      name: "publishedAt",
-      type: "date",
+      name: 'publishedAt',
+      type: 'date',
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
       },
     },
     ...slugField(),
@@ -123,4 +113,4 @@ export const Pages: CollectionConfig = {
     },
     maxPerDoc: 50,
   },
-};
+}

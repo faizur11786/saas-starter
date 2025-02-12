@@ -1,41 +1,41 @@
-import type { Block, Field } from "payload";
+import type { Block, Field } from 'payload'
 
 export const FeatureBlock: Block = {
-  slug: "featureBlock",
-  interfaceName: "FeatureBlock",
+  slug: 'featureBlock',
+  interfaceName: 'FeatureBlock',
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
     {
-      name: "description",
-      type: "text",
+      name: 'description',
+      type: 'text',
     },
     {
-      name: "media",
-      type: "upload",
-      relationTo: "media",
+      name: 'medias',
+      type: 'upload',
+      relationTo: 'medias',
       required: true,
     },
     {
-      name: "features",
-      type: "array",
+      name: 'features',
+      type: 'array',
       fields: [
         {
-          name: "title",
-          type: "text",
+          name: 'title',
+          type: 'text',
         },
         {
-          name: "description",
-          type: "text",
+          name: 'description',
+          type: 'text',
         },
         {
-          name: "icon",
-          type: "textarea",
+          name: 'icon',
+          type: 'textarea',
         },
       ],
     },
   ],
-};
+}

@@ -1,25 +1,25 @@
-import { ArrowRightIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import SectionBadge from "@/components/ui/section-badge";
-import Wrapper from "@/components/custom/wrapper";
-import AnimationContainer from "@/components/custom/animation-container";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { Button } from "@/components/ui/button";
+import { ArrowRightIcon } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import SectionBadge from '@/components/ui/section-badge'
+import Wrapper from '@/components/custom/wrapper'
+import AnimationContainer from '@/components/custom/animation-container'
+import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import { Button } from '@/components/ui/button'
 const HIGHLIGHTS = [
   {
-    icon: "/icons/shield.svg",
-    label: "Secure Platform",
+    icon: '/icons/shield.svg',
+    label: 'Secure Platform',
   },
   {
-    icon: "/icons/clock.svg",
-    label: "Real-time Updates",
+    icon: '/icons/clock.svg',
+    label: 'Real-time Updates',
   },
   {
-    icon: "/icons/magicpen.svg",
-    label: "Smart Features",
+    icon: '/icons/magicpen.svg',
+    label: 'Smart Features',
   },
-];
+]
 
 export const CTA = () => {
   return (
@@ -27,11 +27,7 @@ export const CTA = () => {
       <div className="flex flex-col items-center text-center relative gap-4 py-20 lg:py-32 overflow-hidden z-0">
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#101010] w-full h-1/2 z-10"></div>
 
-        <AnimationContainer
-          animation="scaleUp"
-          delay={0.2}
-          className="w-full mx-auto"
-        >
+        <AnimationContainer animation="scaleUp" delay={0.2} className="w-full mx-auto">
           <div className="absolute -top-1/2 inset-x-0 mx-auto bg-foreground/50 rounded-full size-1/2 blur-[4rem] lg:blur-[10rem]"></div>
         </AnimationContainer>
 
@@ -64,8 +60,7 @@ export const CTA = () => {
 
           <AnimationContainer animation="fadeUp" delay={0.5}>
             <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-lg mx-auto mt-4">
-              Sign up for a free trial and see how PropEase can help you manage
-              your properties.
+              Sign up for a free trial and see how PropEase can help you manage your properties.
             </p>
           </AnimationContainer>
 
@@ -73,11 +68,7 @@ export const CTA = () => {
             <div className="flex items-center mt-4">
               <div className="rounded-full px-4 py-2.5 bg-neutral-900 flex flex-wrap md:flex-row items-center justify-center gap-4">
                 {HIGHLIGHTS.map((item, index) => (
-                  <AnimationContainer
-                    key={index}
-                    animation="fadeRight"
-                    delay={0.7 + index * 0.1}
-                  >
+                  <AnimationContainer key={index} animation="fadeRight" delay={0.7 + index * 0.1}>
                     <div className="flex items-center gap-2 last:hidden md:last:flex">
                       <Image
                         src={item.icon}
@@ -86,9 +77,7 @@ export const CTA = () => {
                         height={1024}
                         className="size-5 text-primary"
                       />
-                      <span className="text-sm text-foreground">
-                        {item.label}
-                      </span>
+                      <span className="text-sm text-foreground">{item.label}</span>
                     </div>
                   </AnimationContainer>
                 ))}
@@ -107,5 +96,5 @@ export const CTA = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 /**
  * Formats a given number or bigint as a currency in INR.
@@ -11,16 +11,13 @@ export function cn(...inputs: ClassValue[]) {
  * @param options Optional Intl.NumberFormat options.
  * @returns The formatted string.
  */
-export const currencyFormatter = (
-  value: number | bigint,
-  options?: Intl.NumberFormatOptions
-) => {
-  return Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "INR",
+export const currencyFormatter = (value: number | bigint, options?: Intl.NumberFormatOptions) => {
+  return Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'INR',
     ...options,
-  }).format(value);
-};
+  }).format(value)
+}
 
 /**
  * Formats a number with currency suffixes, such as "T" for trillion, "B" for billion, "M" for million, and "K" for thousand.
@@ -30,21 +27,21 @@ export const currencyFormatter = (
  */
 export const formatCurrencySuffixes = (
   value: number | bigint,
-  options?: Intl.NumberFormatOptions
+  options?: Intl.NumberFormatOptions,
 ) => {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
     ...options,
-  });
+  })
 
-  if (value >= 1e12) return formatter.format(Number(value) / 1e12) + "T";
-  if (value >= 1e9) return formatter.format(Number(value) / 1e9) + "B";
-  if (value >= 1e6) return formatter.format(Number(value) / 1e6) + "M";
-  if (value >= 1e3) return formatter.format(Number(value) / 1e3) + "K";
+  if (value >= 1e12) return formatter.format(Number(value) / 1e12) + 'T'
+  if (value >= 1e9) return formatter.format(Number(value) / 1e9) + 'B'
+  if (value >= 1e6) return formatter.format(Number(value) / 1e6) + 'M'
+  if (value >= 1e3) return formatter.format(Number(value) / 1e3) + 'K'
 
-  return formatter.format(value);
-};
+  return formatter.format(value)
+}
 
 /**
  * Extracts the initials from a given string of words.
@@ -59,10 +56,10 @@ export const formatCurrencySuffixes = (
 
 export const getInitials = (title: string): string => {
   return title
-    .split(" ")
+    .split(' ')
     .map((word) => word.charAt(0).toUpperCase())
-    .join("");
-};
+    .join('')
+}
 
 /**
  * Converts a camelCase string to kebab-case.
@@ -74,27 +71,27 @@ export const getInitials = (title: string): string => {
  */
 export const toKebabCase = (string: string): string =>
   string
-    ?.replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replace(/\s+/g, "-")
-    .toLowerCase();
+    ?.replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase()
 
 export const generateRandomString = (
   length: number,
-  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
 ) => {
-  let result = "";
+  let result = ''
   for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
+    result += characters.charAt(Math.floor(Math.random() * characters.length))
   }
-  return result;
-};
+  return result
+}
 
 export function toSentenceCase(str: string) {
   return str
-    .replace(/_/g, " ")
-    .replace(/([A-Z])/g, " $1")
+    .replace(/_/g, ' ')
+    .replace(/([A-Z])/g, ' $1')
     .toLowerCase()
     .replace(/^\w/, (c) => c.toUpperCase())
-    .replace(/\s+/g, " ")
-    .trim();
+    .replace(/\s+/g, ' ')
+    .trim()
 }

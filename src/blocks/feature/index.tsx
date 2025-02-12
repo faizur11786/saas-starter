@@ -1,12 +1,12 @@
-import React from "react";
-import type { FeatureBlock as FeatureBlockProps } from "@/payload-types";
+import React from 'react'
+import type { FeatureBlock as FeatureBlockProps } from '@/payload-types'
 
-import { Badge } from "@/components/ui/badge";
-import { Media } from "@/components/media";
-import Image from "next/image";
+import { Badge } from '@/components/ui/badge'
+import { Medias } from '@/components/media'
+import Image from 'next/image'
 
 export const FeatureBlock: React.FC<FeatureBlockProps> = (props) => {
-  const { title, description, features, media } = props;
+  const { title, description, features, medias } = props
   return (
     <section className="">
       <div className="grid rounded-lg container p-8 grid-cols-1 gap-8 items-center lg:grid-cols-2">
@@ -27,10 +27,7 @@ export const FeatureBlock: React.FC<FeatureBlockProps> = (props) => {
           <div className="grid lg:pl-6 grid-cols-1 sm:grid-cols-3 items-start lg:grid-cols-1 gap-6">
             {features?.map((feature) => {
               return (
-                <div
-                  className="flex flex-row gap-6 items-start"
-                  key={feature.id}
-                >
+                <div className="flex flex-row gap-6 items-start" key={feature.id}>
                   <Image
                     className="mt-2"
                     src={feature.icon!}
@@ -40,26 +37,19 @@ export const FeatureBlock: React.FC<FeatureBlockProps> = (props) => {
                   />
                   <div className="flex flex-col gap-1">
                     <p>{feature.title}</p>
-                    <p className="text-muted-foreground text-sm">
-                      {feature.description}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{feature.description}</p>
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
         </div>
         <div className="select-none w-full relative h-[400px] rounded-2xl overflow-hidden bg-muted aspect-square">
-          {media && typeof media === "object" && (
-            <Media
-              fill
-              imgClassName=" object-cover"
-              priority
-              resource={media}
-            />
+          {medias && typeof medias === 'object' && (
+            <Medias fill imgClassName=" object-cover" priority resource={medias} />
           )}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

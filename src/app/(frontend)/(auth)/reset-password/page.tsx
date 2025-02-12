@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ResetPasswordForm } from "@/components/forms/reset-password";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ResetPasswordForm } from '@/components/forms/reset-password'
 
 export default function ResetPasswordPage() {
   return (
@@ -20,5 +14,5 @@ export default function ResetPasswordPage() {
         <ResetPasswordForm />
       </CardContent>
     </Card>
-  );
+  )
 }

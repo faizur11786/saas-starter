@@ -5,11 +5,11 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { redirect } from "next/navigation";
-import { Fragment } from "react";
+} from '@/components/ui/breadcrumb'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import { redirect } from 'next/navigation'
+import { Fragment } from 'react'
 
 export default function Page() {
   return (
@@ -42,5 +42,5 @@ export default function Page() {
         <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
       </div>
     </Fragment>
-  );
+  )
 }

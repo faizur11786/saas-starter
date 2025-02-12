@@ -8,14 +8,14 @@ import {
   Section,
   Button,
   Tailwind,
-} from "@react-email/components";
+} from '@react-email/components'
 
 interface ResetPasswordEmailProps {
-  userFirstName: string;
-  resetPasswordLink: string;
-  companyName: string;
-  supportEmail: string;
-  supportmobile?: string;
+  userFirstName: string
+  resetPasswordLink: string
+  companyName: string
+  supportEmail: string
+  supportMobile?: string
 }
 
 export default function ResetPasswordEmail({
@@ -23,7 +23,7 @@ export default function ResetPasswordEmail({
   resetPasswordLink,
   companyName,
   supportEmail,
-  supportmobile,
+  supportMobile,
 }: ResetPasswordEmailProps) {
   return (
     <Html>
@@ -31,15 +31,12 @@ export default function ResetPasswordEmail({
       <Tailwind>
         <Body className="bg-white font-sans">
           <Container className="mx-auto p-6 max-w-2xl">
-            <Text className="text-2xl font-bold text-gray-900">
-              Password Reset Request
-            </Text>
+            <Text className="text-2xl font-bold text-gray-900">Password Reset Request</Text>
             <Section className="mt-6">
               <Text className="text-gray-700">Hi {userFirstName},</Text>
               <Text className="text-gray-700 mt-4">
-                We received a request to reset your password for your{" "}
-                <strong>{companyName}</strong> account. Click the button below
-                to create a new password:
+                We received a request to reset your password for your <strong>{companyName}</strong>{' '}
+                account. Click the button below to create a new password:
               </Text>
               <Section className="mt-6 text-center">
                 <Button
@@ -50,33 +47,31 @@ export default function ResetPasswordEmail({
                 </Button>
               </Section>
               <Text className="text-gray-700 mt-6">
-                This link will expire in <strong>15 minutes</strong> for
-                security reasons. If you don’t reset your password within this
-                time, you’ll need to submit another request.
+                This link will expire in <strong>15 minutes</strong> for security reasons. If you
+                don’t reset your password within this time, you’ll need to submit another request.
               </Text>
               <Text className="text-gray-700 mt-6">
-                <strong>Didn’t request this change?</strong> If you didn’t
-                initiate this password reset, please ignore this email or
-                contact our support team immediately at{" "}
+                <strong>Didn’t request this change?</strong> If you didn’t initiate this password
+                reset, please ignore this email or contact our support team immediately at{' '}
                 <Link href={`mailto:${supportEmail}`} className="text-blue-600">
                   {supportEmail}
                 </Link>
-                {supportmobile && ` or ${supportmobile}.`}
+                {supportMobile && ` or ${supportMobile}.`}
               </Text>
             </Section>
             <Section className="mt-8 text-center text-gray-500 text-sm">
               <Text>
-                Need help? Visit our{" "}
+                Need help? Visit our{' '}
                 <Link href="#" className="text-blue-600">
                   Help Center
                 </Link>
               </Text>
               <Text>
-                {companyName} |{" "}
+                {companyName} |{' '}
                 <Link href="#" className="text-blue-600">
                   Privacy Policy
-                </Link>{" "}
-                |{" "}
+                </Link>{' '}
+                |{' '}
                 <Link href="#" className="text-blue-600">
                   Terms of Service
                 </Link>
@@ -86,5 +81,5 @@ export default function ResetPasswordEmail({
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }

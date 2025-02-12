@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from 'react'
 
-import { QueryProvider } from "./query-provider";
-import { ThemeProvider } from "./theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { QueryProvider } from './query-provider'
+import { ThemeProvider } from './theme-provider'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export const Providers: FC<Props> = ({ children }) => {
   return (
@@ -25,5 +25,5 @@ export const Providers: FC<Props> = ({ children }) => {
         </QueryProvider>
       </ThemeProvider>
     </TooltipProvider>
-  );
-};
+  )
+}

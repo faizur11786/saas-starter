@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL, "https://media.faizur.me"].map((item) => {
+      ...[NEXT_PUBLIC_SERVER_URL, "https://medias.faizur.me"].map((item) => {
         const url = new URL(item);
         return {
           hostname: url.hostname,
