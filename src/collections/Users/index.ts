@@ -6,6 +6,7 @@ import { getServerSideURL } from '@/lib/getURL'
 import { siteConfig } from '@/config/site'
 import { isSuperAdmin, superAdmin } from '@/access/authenticated'
 import { adminsAndSelf } from './access/adminsAndSelf'
+import uuidField from '@/fields/uuid'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -46,6 +47,7 @@ export const Users: CollectionConfig = {
     },
   },
   fields: [
+    uuidField,
     {
       name: 'name',
       type: 'text',

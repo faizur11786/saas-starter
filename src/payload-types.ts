@@ -673,6 +673,7 @@ export interface ServicesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  id?: T;
   name?: T;
   roles?: T;
   updatedAt?: T;
@@ -690,6 +691,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "medias_select".
  */
 export interface MediasSelect<T extends boolean = true> {
+  id?: T;
   alt?: T;
   caption?: T;
   updatedAt?: T;

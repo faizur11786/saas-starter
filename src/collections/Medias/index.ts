@@ -6,6 +6,7 @@ import {
 import path from 'path'
 import type { CollectionConfig } from 'payload'
 import { fileURLToPath } from 'url'
+import { addContentHashToFile } from './hooks/addContentHashToFile'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -15,7 +16,16 @@ export const Medias: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    beforeOperation: [addContentHashToFile],
+    // afterChange: [handleSvgUpload],
+  },
   fields: [
+    {
+      name: 'id',
+      type: 'text',
+      admin: { hidden: true, readOnly: true },
+    },
     {
       name: 'alt',
       type: 'text',
