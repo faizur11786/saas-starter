@@ -1,43 +1,43 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalConfig } from 'payload'
 
-import { link } from "@/fields/link";
-import { revalidateHeader } from "./hooks/revalidateHeader";
+import { link } from '@/payload/fields/link'
+import { revalidateHeader } from './hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
-  slug: "header",
+  slug: 'header',
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: "tabs",
-      type: "array",
+      name: 'tabs',
+      type: 'array',
       admin: {
         components: {
-          RowLabel: "@/globals/header/CustomRowLabelTabs",
+          RowLabel: '@/globals/header/CustomRowLabelTabs',
         },
       },
       fields: [
         {
-          name: "label",
-          type: "text",
+          name: 'label',
+          type: 'text',
           required: true,
         },
         {
-          type: "row",
+          type: 'row',
           fields: [
             {
-              name: "enableDirectLink",
-              type: "checkbox",
+              name: 'enableDirectLink',
+              type: 'checkbox',
             },
             {
-              name: "enableDropdown",
-              type: "checkbox",
+              name: 'enableDropdown',
+              type: 'checkbox',
             },
           ],
         },
         {
-          type: "collapsible",
+          type: 'collapsible',
           admin: {
             condition: (_, siblingData) => siblingData.enableDirectLink,
           },
@@ -47,48 +47,47 @@ export const Header: GlobalConfig = {
               disableLabel: true,
             }),
           ],
-          label: "Direct Link",
+          label: 'Direct Link',
         },
         {
-          type: "collapsible",
+          type: 'collapsible',
           admin: {
             condition: (_, siblingData) => siblingData.enableDropdown,
           },
           fields: [
             {
-              name: "navItems",
-              type: "array",
+              name: 'navItems',
+              type: 'array',
               admin: {
                 components: {
-                  RowLabel: "@/globals/header/CustomRowLabelNavItems",
+                  RowLabel: '@/globals/header/CustomRowLabelNavItems',
                 },
               },
               fields: [
                 {
-                  name: "style",
-                  type: "select",
-                  defaultValue: "default",
+                  name: 'style',
+                  type: 'select',
+                  defaultValue: 'default',
                   options: [
                     {
-                      label: "Default",
-                      value: "default",
+                      label: 'Default',
+                      value: 'default',
                     },
                     {
-                      label: "Featured",
-                      value: "featured",
+                      label: 'Featured',
+                      value: 'featured',
                     },
                     {
-                      label: "List",
-                      value: "list",
+                      label: 'List',
+                      value: 'list',
                     },
                   ],
                 },
                 {
-                  name: "defaultLink",
-                  type: "group",
+                  name: 'defaultLink',
+                  type: 'group',
                   admin: {
-                    condition: (_, siblingData) =>
-                      siblingData.style === "default",
+                    condition: (_, siblingData) => siblingData.style === 'default',
                   },
                   fields: [
                     link({
@@ -98,30 +97,29 @@ export const Header: GlobalConfig = {
                       },
                     }),
                     {
-                      name: "description",
-                      type: "textarea",
+                      name: 'description',
+                      type: 'textarea',
                     },
                   ],
                 },
                 {
-                  name: "featuredLink",
-                  type: "group",
+                  name: 'featuredLink',
+                  type: 'group',
                   admin: {
-                    condition: (_, siblingData) =>
-                      siblingData.style === "featured",
+                    condition: (_, siblingData) => siblingData.style === 'featured',
                   },
                   fields: [
                     {
-                      name: "tag",
-                      type: "text",
+                      name: 'tag',
+                      type: 'text',
                     },
                     {
-                      name: "label",
-                      type: "richText",
+                      name: 'label',
+                      type: 'richText',
                     },
                     {
-                      name: "links",
-                      type: "array",
+                      name: 'links',
+                      type: 'array',
                       fields: [
                         link({
                           appearances: false,
@@ -134,19 +132,19 @@ export const Header: GlobalConfig = {
                   ],
                 },
                 {
-                  name: "listLinks",
-                  type: "group",
+                  name: 'listLinks',
+                  type: 'group',
                   admin: {
-                    condition: (_, siblingData) => siblingData.style === "list",
+                    condition: (_, siblingData) => siblingData.style === 'list',
                   },
                   fields: [
                     {
-                      name: "tag",
-                      type: "text",
+                      name: 'tag',
+                      type: 'text',
                     },
                     {
-                      name: "links",
-                      type: "array",
+                      name: 'links',
+                      type: 'array',
                       fields: [
                         link({
                           appearances: false,
@@ -161,13 +159,13 @@ export const Header: GlobalConfig = {
               ],
             },
           ],
-          label: "Dropdown Menu",
+          label: 'Dropdown Menu',
         },
       ],
-      label: "Main Menu Items",
+      label: 'Main Menu Items',
     },
   ],
   hooks: {
     afterChange: [revalidateHeader],
   },
-};
+}

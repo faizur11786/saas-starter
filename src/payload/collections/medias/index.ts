@@ -11,7 +11,7 @@ import { addContentHashToFile } from './hooks/addContentHashToFile'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export const Medias: CollectionConfig = {
+export const medias: CollectionConfig = {
   slug: 'medias',
   access: {
     read: () => true,

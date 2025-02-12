@@ -1,6 +1,6 @@
 'use server'
 
-import { getPayload } from '@/lib/payload'
+import { getPayload } from '@/payload/utils'
 import { ForgotPassword, forgotSchema } from '@/schema/auth'
 
 export const forgotPasswordAction = async (args: ForgotPassword) => {

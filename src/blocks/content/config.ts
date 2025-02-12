@@ -10,7 +10,7 @@ import {
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { link } from '@/fields/link'
+import { link } from '@/payload/fields/link'
 
 const columnFields: Field[] = [
   {

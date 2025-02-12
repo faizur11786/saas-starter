@@ -1,6 +1,6 @@
 import { unstable_cache } from 'next/cache'
-import { getPayload } from '.'
 import { Config } from '@/payload-types'
+import { getPayload } from '@/payload/utils'
 
 type Global = keyof Config['globals']
 

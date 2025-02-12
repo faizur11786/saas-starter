@@ -4,11 +4,11 @@ import type { User } from '@/payload-types'
 import ResetPasswordEmail from '@/emails/reset-password'
 import { getServerSideURL } from '@/lib/getURL'
 import { siteConfig } from '@/config/site'
-import { isSuperAdmin, superAdmin } from '@/access/authenticated'
+import { isSuperAdmin, superAdmin } from '@/payload/access/authenticated'
+import uuidField from '@/payload/fields/uuid'
 import { adminsAndSelf } from './access/adminsAndSelf'
-import uuidField from '@/fields/uuid'
 
-export const Users: CollectionConfig = {
+export const users: CollectionConfig = {
   slug: 'users',
   admin: {
     useAsTitle: 'email',
@@ -57,7 +57,7 @@ export const Users: CollectionConfig = {
       type: 'select',
       required: true,
       hasMany: true,
-      defaultValue: 'user',
+      defaultValue: ['user'],
       options: [
         { label: 'Super Admin', value: 'super-admin' },
         { label: 'Admin', value: 'admin' },

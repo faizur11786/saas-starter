@@ -1,8 +1,8 @@
-import { authenticated } from '@/access/authenticated'
+import { authenticated } from '@/payload/access/authenticated'
 import { CollectionConfig } from 'payload'
 import { generateApplicationId } from './utils/applicationId'
 
-export const Applications: CollectionConfig = {
+export const applications: CollectionConfig = {
   slug: 'applications',
   admin: {
     useAsTitle: 'applicationId',

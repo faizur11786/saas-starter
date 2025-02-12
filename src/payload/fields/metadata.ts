@@ -1,31 +1,31 @@
-import { Field, Tab } from "payload";
+import { Field, Tab } from 'payload'
 import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from "@payloadcms/plugin-seo/fields";
-import deepMerge from "@/lib/deepMerge";
+} from '@payloadcms/plugin-seo/fields'
+import deepMerge from '@/payload/utils/deepMerge'
 
-type MetadataTab = (overrides?: Partial<Tab>) => Tab;
+type MetadataTab = (overrides?: Partial<Tab>) => Tab
 
 export const metadataTab: MetadataTab = (overrides: Partial<Tab> = {}) => {
   return deepMerge<Tab, Partial<Tab>>(
     {
-      name: "metadata",
-      label: "Metadata",
+      name: 'metadata',
+      label: 'Metadata',
       fields: [
         OverviewField({
-          titlePath: "meta.title",
-          descriptionPath: "meta.description",
-          imagePath: "meta.image",
+          titlePath: 'meta.title',
+          descriptionPath: 'meta.description',
+          imagePath: 'meta.image',
         }),
         MetaTitleField({
           hasGenerateFn: true,
         }),
         MetaImageField({
-          relationTo: "medias",
+          relationTo: 'medias',
         }),
 
         MetaDescriptionField({}),
@@ -34,11 +34,11 @@ export const metadataTab: MetadataTab = (overrides: Partial<Tab> = {}) => {
           hasGenerateFn: true,
 
           // field paths to match the target field for data
-          titlePath: "meta.title",
-          descriptionPath: "meta.description",
+          titlePath: 'meta.title',
+          descriptionPath: 'meta.description',
         }),
       ],
     },
-    overrides
-  );
-};
+    overrides,
+  )
+}

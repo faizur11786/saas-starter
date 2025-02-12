@@ -11,7 +11,7 @@ import PageClient from './page.client'
 import { RenderBlocks } from '@/blocks/render-blocks'
 import { notFound } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { generateMeta } from '@/lib/payload/generateMeta'
+import { generateMeta } from '@/payload/utils/generateMeta'
 import { RenderHero } from '@/heros'
 // import { LivePreviewListener } from "@/components/LivePreviewListener";
 

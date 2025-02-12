@@ -1,7 +1,7 @@
 import type { Access, AccessArgs } from 'payload'
 
 import type { User } from '@/payload-types'
-import { checkUserRoles } from '@/lib/checkUserRoles'
+import { checkUserRoles } from '@/payload/utils/checkUserRoles'
 
 type isAuthenticated = (args: AccessArgs<User>) => boolean
 

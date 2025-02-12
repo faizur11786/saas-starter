@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
-import { authenticated } from '@/access/authenticated'
-import { slugField } from '@/fields/slug'
+import { authenticated } from '@/payload/access/authenticated'
+import { slugField } from '@/payload/fields/slug'
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -10,11 +10,11 @@ import {
   lexicalEditor,
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
-import { generatePreviewPath } from '@/lib/payload/generatePreviewPath'
+import { generatePreviewPath } from '@/payload/utils/generatePreviewPath'
 import { MediasBlock } from '@/blocks/media/config'
-import { metadataTab } from '@/fields/metadata'
+import { metadataTab } from '@/payload/fields/metadata'
 
-export const Services: CollectionConfig = {
+export const services: CollectionConfig = {
   slug: 'services',
   admin: {
     useAsTitle: 'title',

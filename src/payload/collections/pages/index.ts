@@ -1,18 +1,18 @@
 import type { CollectionConfig } from 'payload'
 
-import { authenticated, authenticatedOrPublished } from '@/access/authenticated'
+import { authenticated, authenticatedOrPublished } from '@/payload/access/authenticated'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
-import { generatePreviewPath } from '@/lib/payload/generatePreviewPath'
-import { slugField } from '@/fields/slug'
+import { generatePreviewPath } from '@/payload/utils/generatePreviewPath'
+import { slugField } from '@/payload/fields/slug'
 import { MediasBlock } from '@/blocks/media/config'
 import { populatePublishedAt } from './hooks/populatePublishedAt'
 import { ContentBlock } from '@/blocks/content/config'
 import { hero } from '@/heros/config'
 import { FeatureBlock } from '@/blocks/feature/config'
-import { metadataTab } from '@/fields/metadata'
+import { metadataTab } from '@/payload/fields/metadata'
 
-export const Pages: CollectionConfig = {
+export const pages: CollectionConfig = {
   slug: 'pages',
   access: {
     create: authenticated,

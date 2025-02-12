@@ -1,6 +1,6 @@
 'use server'
 
-import { getPayload } from '@/lib/payload'
+import { getPayload } from '@/payload/utils'
 import { SignIn, signInSchema } from '@/schema/auth'
 import { cookies } from 'next/headers'
 import { siteConfig } from '@/config/site'

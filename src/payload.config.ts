@@ -5,30 +5,26 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import { Users } from './collections/Users'
-import { Medias } from './collections/Medias'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { NODEMAILER_ADAPTER_CONFIG } from './emails/nodemailer'
-import { plugins } from './plugins'
+import { plugins } from './payload/plugins'
 import { Header } from './globals/header/config'
-import { Pages } from './collections/Pages'
-import { Services } from './collections/Services'
 import { Footer } from './globals/footer/config'
-import { Applications } from './collections/Applications'
 import { siteConfig } from './config/site'
+import collections from '@/payload/collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: 'users',
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
   cookiePrefix: siteConfig.name.toLowerCase(),
-  collections: [Applications, Services, Users, Medias, Pages],
+  collections,
   globals: [Header, Footer],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],

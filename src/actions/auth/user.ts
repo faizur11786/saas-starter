@@ -1,6 +1,6 @@
 'use server'
 
-import { getPayload } from '@/lib/payload'
+import { getPayload } from '@/payload/utils'
 import { headers as nextHeaders } from 'next/headers'
 import { cache } from 'react'
 

@@ -1,7 +1,7 @@
 'use server'
 
 import { siteConfig } from '@/config/site'
-import { getPayload } from '@/lib/payload'
+import { getPayload } from '@/payload/utils'
 import { SignUp, signUpSchema } from '@/schema/auth'
 import { cookies } from 'next/headers'
 

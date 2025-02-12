@@ -1,4 +1,4 @@
-import { isSuperAdmin } from '@/access/authenticated'
+import { isSuperAdmin } from '@/payload/access/authenticated'
 import type { Access } from 'payload'
 
 export const adminsAndSelf: Access = async ({ req: { user } }) => {

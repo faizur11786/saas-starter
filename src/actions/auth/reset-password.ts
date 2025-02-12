@@ -1,6 +1,6 @@
 'use server'
 
-import { getPayload } from '@/lib/payload'
+import { getPayload } from '@/payload/utils'
 import { ResetPassword, resetSchema } from '@/schema/auth'
 
 export const resetPasswordAction = async (args: ResetPassword) => {
