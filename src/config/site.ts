@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: 'Kanoon4All',
+  name: 'Payapp2',
   cookies: {
-    name: 'kanoon4all-token',
+    name: 'payapp2-token',
     options: {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -10,7 +10,7 @@ export const siteConfig = {
     },
   },
   supports: {
-    email: 'support@kanoon4all.com',
+    email: 'support@payapp2.com',
     mobile: '+91 81516 10901',
   },
 }

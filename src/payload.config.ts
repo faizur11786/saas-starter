@@ -15,6 +15,7 @@ import { Pages } from './collections/Pages'
 import { Services } from './collections/Services'
 import { Footer } from './globals/footer/config'
 import { Applications } from './collections/Applications'
+import { siteConfig } from './config/site'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cookiePrefix: 'kanoon4all',
+  cookiePrefix: siteConfig.name.toLowerCase(),
   collections: [Applications, Services, Users, Medias, Pages],
   globals: [Header, Footer],
   editor: lexicalEditor({

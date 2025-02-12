@@ -1,8 +1,9 @@
+import { siteConfig } from '@/config/site'
 import { NodemailerAdapterArgs } from '@payloadcms/email-nodemailer'
 
 export const NODEMAILER_ADAPTER_CONFIG: NodemailerAdapterArgs = {
-  defaultFromAddress: process.env.SMTP_FROM_ADDRESS || 'no-reply@kanoon4all.com',
-  defaultFromName: process.env.SMTP_FROM_NAME || 'kanoon4all',
+  defaultFromAddress: process.env.SMTP_FROM_ADDRESS || 'no-reply@gmail.com',
+  defaultFromName: process.env.SMTP_FROM_NAME || siteConfig.name,
   transportOptions: {
     host: process.env.SMTP_HOST || '127.0.0.1',
     port: Number(process.env.SMTP_PORT) || 1025,

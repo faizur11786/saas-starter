@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getServerSideURL } from '../getURL'
+import { siteConfig } from '@/config/site'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
@@ -10,8 +11,8 @@ const defaultOpenGraph: Metadata['openGraph'] = {
       url: `${getServerSideURL()}/website-template-OG.webp`,
     },
   ],
-  siteName: 'Kanoon4All',
-  title: 'Kanoon4All',
+  siteName: siteConfig.name,
+  title: siteConfig.name,
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {

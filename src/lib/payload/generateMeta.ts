@@ -24,7 +24,7 @@ export const generateMeta = async (args: { doc: Partial<Page> }): Promise<Metada
 
   const ogImage = getImageURL(doc?.metadata?.image)
 
-  const title = doc?.metadata?.title ? doc?.metadata?.title + ' | Kanoon4All' : 'Kanoon4All'
+  const title = doc?.metadata?.title ? doc.metadata.title + ' | Kanoon4All' : 'Kanoon4All'
 
   return {
     description: doc?.metadata?.description,
