@@ -33,7 +33,7 @@ export const Medias: CollectionConfig = {
   ],
   upload: {
     // Upload to the public/medias directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/medias'),
+    staticDir: path.resolve(dirname, '../../../public/medias'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [
